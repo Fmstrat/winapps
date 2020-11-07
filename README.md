@@ -10,6 +10,8 @@ Rather than wait around for this, WinApps was created as an easy, one command wa
 - Running a Windows RDP server in a background VM container
 - Checking the RDP server for installed applications such as Microsoft Office
 - If those programs are installed, it creates shortcuts leveraging FreeRDP for both the CLI and the GNOME tray
+- Files in your home directory are accessible via the `\\tsclient\home` mount inside the VM
+- You can right click on any files in your home directory to open with an application, too
 
 ## Installation
 
