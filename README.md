@@ -25,11 +25,11 @@ RDP_PASS="MyWindowsPassword"
 If you are using Option 2 below with a pre-existing non-KVM RDP server, you can use the `RDP_IP` to specify it's location. If you are running a VM in KVM with NAT enabled, leave `RDP_IP` commented out and WinApps will auto-detect the right local IP.
 
 ### Option 1 - Running KVM
-You can refer to the [KVM](https://www.linux-kvm.org) documentation for specifics, but the first thing you need to do is set up a Virtual Machine running Windows 10 Professional (or any version that supports RDP). Fist, install KVM:
+You can refer to the [KVM](https://www.linux-kvm.org) documentation for specifics, but the first thing you need to do is set up a Virtual Machine running Windows 10 Professional (or any version that supports RDP). Fist, clone WinApps and install KVM and FreeRDP:
 ``` bash
 git clone https://github.com/Fmstrat/winapps.git
 cd winapps
-sudo apt-get install -y virt-manager
+sudo apt-get install -y virt-manager freerdp2-x11
 ```
 
 Now set up KVM to run as your user instead of root and allow it through AppArmor (for Ubuntu 20.04 and above):
@@ -86,6 +86,7 @@ If you already have an RDP server or VM, using WinApps is very straight forward.
 ``` bash
 $ git clone https://github.com/Fmstrat/winapps.git
 $ cd winapps
+$ sudo apt-get install -y freerdp2-x11
 $ ./install.sh
 [sudo] password for fmstrat: 
 Installing...
