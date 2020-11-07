@@ -1,7 +1,7 @@
 # WinApps for Linux
 Run Windows apps such as Microsoft Office in Linux (Ubuntu) and GNOME as if they were a part of the native OS, including Nautilus integration for right clicking on files of specific mime types to open them.
 
-![Demo](demo/demo.gif | width=600)
+<img src="demo/demo.gif" width=1000>
 
 ## How it works and why WinApps exists
 Back in April, Hayden Barnes [tweeted](https://twitter.com/unixterminal/status/1255919797692440578?lang=en) what appeared to be native Windows apps in a container or VM inside Ubuntu. However, no details have emerged on how this was accomplished, though it is likely a similar method to this but with an insider build Windows Container.
