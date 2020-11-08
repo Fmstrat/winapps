@@ -76,8 +76,8 @@ After the install process, you will want to:
     - Type "About"
     - Open "About"
     - Change the PC name to "RDPWindows" (This will allow WinApps to detect the local IP)
-- Go to Control Panel
-    - Under "System," allow remote connections for RDP
+- Go to Settings
+    - Under "System", then "Remote Desktop" allow remote connections for RDP
 - Merge `kvm/RDPApps.reg` into the registry to enable RDP Applications
 
 And the final step is to run the installer:
