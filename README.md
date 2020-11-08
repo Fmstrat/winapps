@@ -13,6 +13,17 @@ Rather than wait around for this, WinApps was created as an easy, one command wa
 - Files in your home directory are accessible via the `\\tsclient\home` mount inside the VM
 - You can right click on any files in your home directory to open with an application, too
 
+## App support and "To Do"
+Currently supported apps
+- Microsoft Word
+- Microsoft Excel
+- Microsoft PowerPoint
+
+To Do
+- Add additional app configurations (Outlook, OneNote, IE, Edge, Photoshop, Acrobat, etc)
+- Subsystem support: Add a script to remove (and re-add) the Explorer shell and other non-required Windows features to minimize overhead
+- Automate the Windows elements of the install
+
 ## Installation
 
 ### Creating your WinApps configuration file
