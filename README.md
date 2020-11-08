@@ -18,6 +18,7 @@ Currently supported apps
 - Microsoft Word
 - Microsoft Excel
 - Microsoft PowerPoint
+- Internet Explorer (just because)
 
 To Do
 - Add additional app configurations (Outlook, OneNote, IE, Edge, Photoshop, Acrobat, etc)
