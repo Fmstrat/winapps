@@ -36,12 +36,16 @@ if [ -z "$(which xfreerdp)" ]; then
 	exit
 fi
 
-if [ ! -f "${HOME}/.winapps" ]; then
-	echo "You need to create a ~/.winapps configuration. Exiting..."
+if [ ! -f "${HOME}/.config/winapps/winapps.conf" ] && [ ! -f "${HOME}/.winapps" ]; then
+	echo "You need to create a ~/.config/winapps/winapps.conf configuration. Exiting..."
 	exit
 fi
 
-. "${HOME}/.winapps"
+if [ -f "${HOME}/.config/winapps/winapps.conf" ]; then
+	. "${HOME}/.config/winapps/winapps.conf"
+else
+	. "${HOME}/.winapps"
+fi
 
 if [ -z "${RDP_IP}" ]; then
 	if [ -z "$(groups |grep libvirt)" ]; then

@@ -28,7 +28,7 @@ To Do
 ## Installation
 
 ### Creating your WinApps configuration file
-You will need to create a `~/.winapps` configuration file with the following information in it:
+You will need to create a `~/.config/winapps/winapps.conf` configuration file with the following information in it:
 ``` bash
 RDP_USER="MyWindowsUser"
 RDP_PASS="MyWindowsPassword"
@@ -95,7 +95,7 @@ Installation complete.
 ```
 
 ### Option 2 - I already have an RDP server or VM
-If you already have an RDP server or VM, using WinApps is very straight forward. Simply create your `~/.winapps` configuration file, and run:
+If you already have an RDP server or VM, using WinApps is very straight forward. Simply create your `~/.config/winapps/winapps.conf` configuration file, and run:
 ``` bash
 $ git clone https://github.com/Fmstrat/winapps.git
 $ cd winapps
