@@ -30,7 +30,7 @@ echo ""
 # Install apps
 for F in $(cat "${HOME}/.winapps.installed" |sed 's/\r/\n/g'); do
 	. "${DIR}/apps/${F}/info"
-	echo -n "  Installing ${NAME}..."
+	echo -n "  Configuring ${NAME}..."
 	sudo rm -f "/usr/share/applications/${F}.desktop"
 	echo "[Desktop Entry]
 Name=${NAME}
@@ -48,13 +48,13 @@ MimeType=${MIME_TYPES}
 ${DIR}/bin/winapps ${F} $@
 " |sudo tee "/usr/local/bin/${F}" > /dev/null
 	sudo chmod a+x "/usr/local/bin/${F}"
-	echo ""
+	echo " Finished."
 done
 rm -f "${HOME}/.winapps.installed"
 rm -f "${HOME}/.winapps.installed.bat"
 
 # Install windows
-echo -n "  Installing Windows..."
+echo -n "  Configuring Windows..."
 sudo rm -f "/usr/share/applications/windows.desktop"
 echo "[Desktop Entry]
 Name=Windows
@@ -71,6 +71,6 @@ echo "#!/usr/bin/env bash
 ${DIR}/bin/winapps windows
 " |sudo tee "/usr/local/bin/windows" > /dev/null
 sudo chmod a+x "/usr/local/bin/windows"
-echo ""
+echo " Finished."
 
 echo "Installation complete."

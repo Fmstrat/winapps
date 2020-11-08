@@ -54,7 +54,7 @@ virsh define kvm/RDPWindows.xml
 virsh autostart RDPWindows
 ```
 
-You will now want to change any settings on the VM and install Windows. You can access the VM with:
+You will now want to change any settings on the VM and install Windows and whatever programs you would like, such as Microsoft Office. You can access the VM with:
 ``` bash
 virt-manager
 ```
@@ -74,10 +74,11 @@ $ ./install.sh
 [sudo] password for fmstrat: 
 Installing...
   Checking for installed apps in RDP machine...
-  Installing Excel...
-  Installing PowerPoint...
-  Installing Word...
-  Installing Windows...
+  Checking for installed apps in RDP machine...
+  Configuring Excel... Finished.
+  Configuring PowerPoint... Finished.
+  Configuring Word... Finished.
+  Configuring Windows... Finished.
 Installation complete.
 ```
 
@@ -91,10 +92,10 @@ $ ./install.sh
 [sudo] password for fmstrat: 
 Installing...
   Checking for installed apps in RDP machine...
-  Installing Excel...
-  Installing PowerPoint...
-  Installing Word...
-  Installing Windows...
+  Configuring Excel... Finished.
+  Configuring PowerPoint... Finished.
+  Configuring Word... Finished.
+  Configuring Windows... Finished.
 Installation complete.
 ```
 You will need to make sure RDP Applications are enabled, which can be set by merging in `kvm/RDPApps.reg` into the registry.
@@ -105,3 +106,5 @@ Adding applications to the installer is easy. Simply copy one of the application
 - Replace the `icon.svg` with an SVG for the application
 - Re-run the installer
 - Submit a Pull Request to add it to WinApps officially
+
+When running the installer, it will check for if any configured apps are installed, and if they are it will create the appropriate shortcuts on the host OS.
