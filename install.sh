@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 
+if [[ $EUID -ne 0 ]]; then
+  echo "Please run as sudo."
+  exit 1
+fi
+
 sudo ls > /dev/null
 
 echo "Installing..."
