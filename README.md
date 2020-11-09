@@ -112,6 +112,12 @@ Installation complete.
 ```
 You will need to make sure RDP Applications are enabled, which can be set by merging in `kvm/RDPApps.reg` into the registry.
 
+### enable activex 
+
+You first want to go into your vm. and do as followed:
+
+press Win logo + R, type regedit.exe, press OK, go to ```HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Office```, then press Edit on the top (header) > Find, type COM Compatibility, press OK, wait, open ```COM Compatibility folder```, look for ```8856F961-340A-11D0-A96B-00C04FD705A2``` and click it, then double click Compatibility Flags, type ```0``` and finally press OK
+
 ## Adding applications
 Adding applications to the installer is easy. Simply copy one of the application configurations in the `apps` folder, and:
 - Edit the variables for the application
