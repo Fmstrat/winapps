@@ -47,6 +47,13 @@ else
 	. "${HOME}/.winapps"
 fi
 
+if [ -z "${SHARE_PATH}" ]; then
+	SHARE_PATH="${HOME}"
+	SHARE_NAME='home'
+else
+	SHARE_NAME=$(basename "${SHARE_PATH}")
+fi
+
 if [ -z "${RDP_IP}" ]; then
 	if [ -z "$(groups |grep libvirt)" ]; then
 		echo "You are not a member of the libvirt group. Run the below then reboot."
@@ -64,13 +71,15 @@ if [ -z "${RDP_IP}" ]; then
 fi
 
 if [ "${1}" = "windows" ]; then
-	xfreerdp /u:"${RDP_USER}" /p:"${RDP_PASS}" /v:${RDP_IP} /dynamic-resolution +auto-reconnect +home-drive /wm-class:"Microsoft Windows" 1> /dev/null 2>&1 &
+	xfreerdp /u:"${RDP_USER}" /p:"${RDP_PASS}" /v:${RDP_IP} /dynamic-resolution +auto-reconnect /drive:"${SHARE_NAME}","${SHARE_PATH}" /wm-class:"Microsoft Windows" 1> /dev/null 2>&1 &
 elif [ "${1}" != "install" ]; then
 	. "${DIR}/../apps/${1}/info"
 	if [ -n "${2}" ]; then
-		FILE=$(echo "${2}" | sed 's|'"${HOME}"'|\\\\tsclient\\home|;s|/|\\|g;s|\\|\\\\|g')
-		xfreerdp /u:"${RDP_USER}" /p:"${RDP_PASS}" /v:${RDP_IP} +auto-reconnect +home-drive -wallpaper /span /wm-class:"${FULL_NAME}" /app:"${WIN_EXECUTABLE}" /app-icon:"${DIR}/../apps/${1}/icon.svg" /app-cmd:"\"${FILE}\"" 1> /dev/null 2>&1 &
+		HOST_WORKDIR=$(dirname "${2}")
+		GUEST_WORKDIR=$(echo "${HOST_WORKDIR}" | sed 's/\//_/g')
+		FILE="\\\\tsclient\\${GUEST_WORKDIR}\\$(basename "${2}")"
+		xfreerdp /u:"${RDP_USER}" /p:"${RDP_PASS}" /v:${RDP_IP} +auto-reconnect /drive:"${GUEST_WORKDIR}","${HOST_WORKDIR}" /drive:"${SHARE_NAME}","${SHARE_PATH}" -wallpaper /span /wm-class:"${FULL_NAME}" /app:"${WIN_EXECUTABLE}" /app-icon:"${DIR}/../apps/${1}/icon.svg" /app-cmd:"\"${FILE}\"" 1> /dev/null 2>&1 &
 	else
-		xfreerdp /u:"${RDP_USER}" /p:"${RDP_PASS}" /v:${RDP_IP} +auto-reconnect +home-drive -wallpaper /span /wm-class:"${FULL_NAME}" /app:"${WIN_EXECUTABLE}" /app-icon:"${DIR}/../apps/${1}/icon.svg" 1> /dev/null 2>&1 &
+		xfreerdp /u:"${RDP_USER}" /p:"${RDP_PASS}" /v:${RDP_IP} +auto-reconnect /drive:"${SHARE_NAME}","${SHARE_PATH}" -wallpaper /span /wm-class:"${FULL_NAME}" /app:"${WIN_EXECUTABLE}" /app-icon:"${DIR}/../apps/${1}/icon.svg" 1> /dev/null 2>&1 &
 	fi
 fi
