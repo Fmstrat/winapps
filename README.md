@@ -10,7 +10,7 @@ Rather than wait around for this, WinApps was created as an easy, one command wa
 - Running a Windows RDP server in a background VM container
 - Checking the RDP server for installed applications such as Microsoft Office
 - If those programs are installed, it creates shortcuts leveraging FreeRDP for both the CLI and the GNOME tray
-- Files in your home directory are accessible via the `\\tsclient\home` mount inside the VM
+- Files in your home directory are accessible via the `\\tsclient\home` mount inside the VM (configurable)
 - You can right click on any files in your home directory to open with an application, too
 
 ## App support and "To Do"
@@ -32,9 +32,12 @@ You will need to create a `~/.config/winapps/winapps.conf` configuration file wi
 ``` bash
 RDP_USER="MyWindowsUser"
 RDP_PASS="MyWindowsPassword"
+#SHARE_PATH="$HOME"
 #RDP_IP="192.168.123.111"
 ```
 If you are using Option 2 below with a pre-existing non-KVM RDP server, you can use the `RDP_IP` to specify it's location. If you are running a VM in KVM with NAT enabled, leave `RDP_IP` commented out and WinApps will auto-detect the right local IP.
+
+Use `SHARE_PATH` to specify a path on the host to share with the VM. Defaults to your home directory if no value is set.
 
 ### Option 1 - Running KVM
 You can refer to the [KVM](https://www.linux-kvm.org) documentation for specifics, but the first thing you need to do is set up a Virtual Machine running Windows 10 Professional (or any version that supports RDP). First, clone WinApps and install KVM and FreeRDP:
