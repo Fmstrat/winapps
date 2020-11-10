@@ -51,7 +51,7 @@ if [ -z "${SHARE_PATH}" ]; then
 	SHARE_PATH="${HOME}"
 	SHARE_NAME='home'
 else
-	SHARE_NAME=$(basename "${SHARE_PATH}")
+	SHARE_NAME='shared'
 fi
 
 if [ -z "${RDP_IP}" ]; then
