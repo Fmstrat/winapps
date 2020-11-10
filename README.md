@@ -1,5 +1,5 @@
 # WinApps for Linux
-Run Windows apps such as Microsoft Office in Linux (Ubuntu) and GNOME as if they were a part of the native OS, including Nautilus integration for right clicking on files of specific mime types to open them.
+Run Windows apps such as Microsoft Office in Linux (Ubuntu/Fedora) and GNOME/KDE as if they were a part of the native OS, including Nautilus integration for right clicking on files of specific mime types to open them.
 
 <img src="demo/demo.gif" width=1000>
 
@@ -14,14 +14,34 @@ Rather than wait around for this, WinApps was created as an easy, one command wa
 - You can right click on any files in your home directory to open with an application, too
 
 ## App support and "To Do"
+Note: The app list below is fueled by the community, and therefore many apps may be untested by the WinApps team.
+
 Currently supported apps
-- Microsoft Word
-- Microsoft Excel
-- Microsoft PowerPoint
-- Internet Explorer (just because)
+- Internet Explorer 11 (just because)
+- Microsoft Access (2016)
+- Microsoft Access (2019)
+- Microsoft Access (Office 365)
+- Microsoft Excel (2016)
+- Microsoft Excel (2019)
+- Microsoft Excel (Office 365)
+- Microsoft Word (2016)
+- Microsoft Word (2019)
+- Microsoft Word (Office 365)
+- Microsoft OneNote (2016)
+- Microsoft OneNote (2019)
+- Microsoft OneNote (Office 365)
+- Microsoft Outlook (2016)
+- Microsoft Outlook (2019)
+- Microsoft Outlook (Office 365)
+- Microsoft PowerPoint (2016)
+- Microsoft PowerPoint (2019)
+- Microsoft PowerPoint (Office 365)
+- Microsoft Publisher (2016)
+- Microsoft Publisher (2019)
+- Microsoft Publisher (Office 365)
 
 To Do
-- Add additional app configurations (Outlook, OneNote, IE, Edge, Photoshop, Acrobat, etc)
+- Add additional app configurations
 - Subsystem support: Add a script to remove (and re-add) the Explorer shell and other non-required Windows features to minimize overhead
 - Automate the Windows elements of the install
 
@@ -33,8 +53,11 @@ You will need to create a `~/.config/winapps/winapps.conf` configuration file wi
 RDP_USER="MyWindowsUser"
 RDP_PASS="MyWindowsPassword"
 #RDP_IP="192.168.123.111"
+#DEBUG="true"
 ```
 If you are using Option 2 below with a pre-existing non-KVM RDP server, you can use the `RDP_IP` to specify it's location. If you are running a VM in KVM with NAT enabled, leave `RDP_IP` commented out and WinApps will auto-detect the right local IP.
+
+If you enable `DEBUG`, a log will be created on each application start in `~/.local/share/winapps/winapps.log`.
 
 ### Option 1 - Running KVM
 You can refer to the [KVM](https://www.linux-kvm.org) documentation for specifics, but the first thing you need to do is set up a Virtual Machine running Windows 10 Professional (or any version that supports RDP). First, clone WinApps and install KVM and FreeRDP:
@@ -86,7 +109,6 @@ $ ./install.sh
 [sudo] password for fmstrat: 
 Installing...
   Checking for installed apps in RDP machine...
-  Checking for installed apps in RDP machine...
   Configuring Excel... Finished.
   Configuring PowerPoint... Finished.
   Configuring Word... Finished.
@@ -120,3 +142,18 @@ Adding applications to the installer is easy. Simply copy one of the application
 - Submit a Pull Request to add it to WinApps officially
 
 When running the installer, it will check for if any configured apps are installed, and if they are it will create the appropriate shortcuts on the host OS.
+
+## Checking for new application support
+The installer can be run multiple times, so simply run:
+``` bash
+$ git pull
+$ ./install.sh
+[sudo] password for fmstrat: 
+Installing...
+  Checking for installed apps in RDP machine...
+  Configuring Excel... Finished.
+  Configuring PowerPoint... Finished.
+  Configuring Word... Finished.
+  Configuring Windows... Finished.
+Installation complete.
+```
