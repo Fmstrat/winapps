@@ -1,8 +1,8 @@
 # GNOME shortcut name
-NAME="Visual Studio 2019"
+NAME="Visual Studio 2019 Enterprise"
 
 # Used for descriptions and window class
-FULL_NAME="Visual Studio 2019"
+FULL_NAME="Visual Studio 2019 Enterprise"
 
 # The executable inside windows
 WIN_EXECUTABLE="C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\devenv.exe"
