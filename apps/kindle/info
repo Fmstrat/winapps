@@ -1,0 +1,14 @@
+# GNOME shortcut name
+NAME="Kindle"
+
+# Used for descriptions and window class
+FULL_NAME="Amazon Kindle"
+
+# The executable inside windows
+WIN_EXECUTABLE="c:\users\brent\appdata\local\amazon\kindle\application\kindle.exe"
+
+# GNOME categories
+CATEGORIES="Education"
+
+# GNOME mimetypes
+MIME_TYPES=";"
