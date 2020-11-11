@@ -87,4 +87,25 @@ elif [ "${1}" != "install" ]; then
 	fi
 fi
 
+set -x
+sleep 15
+if [ ! -f "${HOME}/.local/share/winapps/wmclass" ]; then
+	touch "${HOME}/.local/share/winapps/wmclass"
+fi
+RDP_WINDOWS=$(xdotool search --pid $(pgrep xfreerdp) --onlyvisible)
+for RDP_WINDOW in $RDP_WINDOWS; do
+	EXISTING_CLASS=$(tail -n 10 "${HOME}/.local/share/winapps/wmclass" |grep ^${RDP_WINDOW})
+	EXISTING_CLASS=${EXISTING_CLASS#* }
+	CUR_CLASS=$(xprop -id ${RDP_WINDOW} WM_CLASS)
+	CUR_CLASS=${CUR_CLASS##*'", "'}
+	CUR_CLASS=${CUR_CLASS%%'"'}
+	if [ -n "${EXISTING_CLASS}" ]; then
+		if [ "${EXISTING_CLASS}" != "${CUR_CLASS}" ]; then
+			xdotool set_window --class "${EXISTING_CLASS}" ${RDP_WINDOW}
+		fi
+	else
+		echo "${RDP_WINDOW} ${CUR_CLASS}" >> "${HOME}/.local/share/winapps/wmclass"
+	fi
+done
+
 dprint "END"
