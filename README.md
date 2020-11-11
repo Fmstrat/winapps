@@ -61,6 +61,9 @@ Note: The app list below is fueled by the community, and therefore many apps may
   </tr>
   <tr>
     <td><img src="apps/powershell/icon.svg" width="100"></td><td>Powershell</td>
+    <td><img src="apps/vs2019enterprise/icon.svg" width="100"></td><td>Visual Studio 2019<br>(Enterprise, Professional, Community)</td>
+  </tr>
+  <tr>
     <td><img src="icons/windows.svg" width="100"></td><td>Windows<br>(Full RDP session)</td>
   </tr>
 </table>
@@ -204,3 +207,4 @@ Installation complete.
   - Fluent UI - Icons under [MIT License](https://github.com/Fmstrat/fluentui/blob/master/LICENSE) with [restricted use](https://static2.sharepointonline.com/files/fabric/assets/microsoft_fabric_assets_license_agreement_nov_2019.pdf)
   - PKief's VSCode Material Icon Theme - Icons under [MIT License](https://github.com/Fmstrat/vscode-material-icon-theme/blob/master/LICENSE.md)
   - DiemenDesign's LibreICONS - Icons under [MIT License](https://github.com/Fmstrat/LibreICONS/blob/master/LICENSE)
+  - Wikipedia - Icons under [Wikimedia Commons License](https://en.wikipedia.org/wiki/File:Visual_Studio_Icon_2019.svg)
