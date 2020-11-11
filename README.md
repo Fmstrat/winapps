@@ -125,7 +125,18 @@ Installation complete.
 ```
 
 ### Option 2 - I already have an RDP server or VM
-If you already have an RDP server or VM, using WinApps is very straight forward. Simply create your `~/.config/winapps/winapps.conf` configuration file, and run:
+If you already have an RDP server or VM, using WinApps is very straight forward.
+
+In your existing VM:
+- Go to the Start Menu
+    - Type "About"
+    - Open "About"
+    - Change the PC name to "RDPWindows" (This will allow WinApps to detect the local IP)
+- Go to Settings
+    - Under "System", then "Remote Desktop" allow remote connections for RDP
+- Merge `kvm/RDPApps.reg` into the registry to enable RDP Applications
+
+ Then simply create your `~/.config/winapps/winapps.conf` configuration file, and run:
 ``` bash
 $ git clone https://github.com/Fmstrat/winapps.git
 $ cd winapps
