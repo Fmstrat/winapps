@@ -1,0 +1,15 @@
+# GNOME shortcut name
+NAME="Visual Studio 2019 Community"
+
+# Used for descriptions and window class
+FULL_NAME="Visual Studio 2019 Community"
+
+# The executable inside windows
+WIN_EXECUTABLE="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\devenv.exe"
+
+# GNOME categories
+CATEGORIES="Code"
+
+# GNOME mimetypes
+# See: https://stackoverflow.com/questions/208056/what-are-the-mime-types-for-net-project-source-code-files
+MIME_TYPES="text/xml;text/plain;text/x-csharp"
