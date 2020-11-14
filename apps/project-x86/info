@@ -1,0 +1,14 @@
+# GNOME shortcut name
+NAME="Project"
+
+# Used for descriptions and window class
+FULL_NAME="Microsoft Project"
+
+# The executable inside windows
+WIN_EXECUTABLE="C:\Program Files (x86)\Microsoft Office\Office16\WINPROJ.EXE"
+
+# GNOME categories
+CATEGORIES="Office"
+
+# GNOME mimetypes
+MIME_TYPES="application/msproj;application/msproject;application/x-msproject;application/x-ms-project;application/vnd.ms-project;"

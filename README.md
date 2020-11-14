@@ -55,15 +55,15 @@ Note: The app list below is fueled by the community, and therefore many apps may
   </tr>
   <tr>
     <td><img src="apps/powerpoint/icon.svg" width="100"></td><td>Microsoft PowerPoint<br>(2016, 2019, o365)</td>
+    <td><img src="apps/project/icon.svg" width="100"></td><td>Microsoft Project<br>(2016, 2019, o365)</td>
+  </tr>
     <td><img src="apps/publisher/icon.svg" width="100"></td><td>Microsoft Publisher<br>(2016, 2019, o365)</td>
-  </tr>
-  <tr>
     <td><img src="apps/powershell/icon.svg" width="100"></td><td>Powershell</td>
-    <td><img src="apps/vs-enterprise-2019/icon.svg" width="100"></td><td>Visual Studio<br>(2019 - Ent|Pro|Com)</td>
+  <tr>
   </tr>
   <tr>
+    <td><img src="apps/vs-enterprise-2019/icon.svg" width="100"></td><td>Visual Studio<br>(2019 - Ent|Pro|Com)</td>
     <td><img src="icons/windows.svg" width="100"></td><td>Windows<br>(Full RDP session)</td>
-    <td>&nbsp;</td><td>&nbsp;</td>
   </tr>
 </table>
 
