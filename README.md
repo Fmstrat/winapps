@@ -35,7 +35,7 @@ Note: The app list below is fueled by the community, and therefore many apps may
   <tr>
   </tr>
     <td><img src="apps/photoshop-cc/icon.svg" width="100"></td><td>Adobe Photoshop<br>(CS6, CC)</td>
-    <td><img src="apps/premier-cc/icon.svg" width="100"></td><td>Adobe Premier<br>(CC)</td>
+    <td><img src="apps/premiere-pro-cc/icon.svg" width="100"></td><td>Adobe Premiere Pro<br>(CC)</td>
   </tr>
   <tr>
     <td><img src="apps/cmd/icon.svg" width="100"></td><td>Command Prompt<br>(cmd.exe)</td>
