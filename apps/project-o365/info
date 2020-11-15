@@ -8,7 +8,7 @@ FULL_NAME="Microsoft Project"
 WIN_EXECUTABLE="C:\Program Files\Microsoft Office\root\Office16\WINPROJ.EXE"
 
 # GNOME categories
-CATEGORIES="Office"
+CATEGORIES="WinApps;Office"
 
 # GNOME mimetypes
 MIME_TYPES="application/msproj;application/msproject;application/x-msproject;application/x-ms-project;application/vnd.ms-project;"
