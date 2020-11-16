@@ -8,7 +8,7 @@ FULL_NAME="Visual Studio 2019 Community"
 WIN_EXECUTABLE="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\devenv.exe"
 
 # GNOME categories
-CATEGORIES="Code"
+CATEGORIES="WinApps;Code"
 
 # GNOME mimetypes
 # See: https://stackoverflow.com/questions/208056/what-are-the-mime-types-for-net-project-source-code-files

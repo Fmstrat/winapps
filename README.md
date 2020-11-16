@@ -35,7 +35,7 @@ Note: The app list below is fueled by the community, and therefore many apps may
   <tr>
   </tr>
     <td><img src="apps/photoshop-cc/icon.svg" width="100"></td><td>Adobe Photoshop<br>(CS6, CC)</td>
-    <td><img src="apps/premier-cc/icon.svg" width="100"></td><td>Adobe Premier<br>(CC)</td>
+    <td><img src="apps/premiere-pro-cc/icon.svg" width="100"></td><td>Adobe Premiere Pro<br>(CC)</td>
   </tr>
   <tr>
     <td><img src="apps/cmd/icon.svg" width="100"></td><td>Command Prompt<br>(cmd.exe)</td>
@@ -55,15 +55,15 @@ Note: The app list below is fueled by the community, and therefore many apps may
   </tr>
   <tr>
     <td><img src="apps/powerpoint/icon.svg" width="100"></td><td>Microsoft PowerPoint<br>(2016, 2019, o365)</td>
+    <td><img src="apps/project/icon.svg" width="100"></td><td>Microsoft Project<br>(2016, 2019, o365)</td>
+  </tr>
     <td><img src="apps/publisher/icon.svg" width="100"></td><td>Microsoft Publisher<br>(2016, 2019, o365)</td>
-  </tr>
-  <tr>
     <td><img src="apps/powershell/icon.svg" width="100"></td><td>Powershell</td>
-    <td><img src="apps/vs-enterprise-2019/icon.svg" width="100"></td><td>Visual Studio<br>(2019 - Ent|Pro|Com)</td>
+  <tr>
   </tr>
   <tr>
+    <td><img src="apps/vs-enterprise-2019/icon.svg" width="100"></td><td>Visual Studio<br>(2019 - Ent|Pro|Com)</td>
     <td><img src="icons/windows.svg" width="100"></td><td>Windows<br>(Full RDP session)</td>
-    <td>&nbsp;</td><td>&nbsp;</td>
   </tr>
 </table>
 
@@ -84,6 +84,7 @@ RDP_PASS="MyWindowsPassword"
 #RDP_DOMAIN="MYDOMAIN"
 #RDP_IP="192.168.123.111"
 #RDP_SCALE=100
+#RDP_FLAGS=""
 #MULTIMON="true"
 #DEBUG="true"
 ```
@@ -93,6 +94,7 @@ Options:
 - If you are running a VM in KVM with NAT enabled, leave `RDP_IP` commented out and WinApps will auto-detect the right local IP
 - For domain users, you can uncomment and change `RDP_DOMAIN`
 - On high-resolution (UHD) displays, you can set `RDP_SCALE` to the scale you would like [100|140|160|180]
+- To add flags to the FreeRDP call, such as `/audio-mode:1` to pass in a mic, use the `RDP_FLAGS` configuration option
 - For multi-monitor setups, you can try enabling `MULTIMON`, however if you get a black screen (FreeRDP bug) you will need to revert back
 - If you enable `DEBUG`, a log will be created on each application start in `~/.local/share/winapps/winapps.log`
 
