@@ -67,6 +67,7 @@ Note: The app list below is fueled by the community, and therefore many apps may
   </tr>
   <tr>
     <td><img src="icons/windows.svg" width="100"></td><td>Windows<br>(Full RDP session)</td>
+    <td>&nbsp;</td><td>&nbsp;</td>
   </tr>
 </table>
 
