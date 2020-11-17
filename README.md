@@ -18,8 +18,8 @@ Note: The app list below is fueled by the community, and therefore many apps may
 
 <table cellpadding="10" cellspacing="0" border="0">
   <tr>
+    <td><img src="apps/acrobat-reader-dc/icon.svg" width="100"></td><td>Adobe Acrobat Reader Pro</td>
     <td><img src="apps/acrobat-x-pro/icon.svg" width="100"></td><td>Adobe Acrobat Pro<br>(X)</td>
-    <td><img src="apps/acrobat-reader-dc/icon.svg" width="100"></td><td>Adobe Reader DC</td>
   </tr>
   <tr>
     <td><img src="apps/aftereffects-cc/icon.svg" width="100"></td><td>Adobe After Effects<br>(CC)</td>
@@ -35,10 +35,10 @@ Note: The app list below is fueled by the community, and therefore many apps may
   </tr>
   <tr>
     <td><img src="apps/lightroom-cc/icon.svg" width="100"></td><td>Adobe Lightroom<br>(CC)</td>
-    <td><img src="apps/premiere-pro-cc/icon.svg" width="100"></td><td>Adobe Premiere Pro<br>(CC)</td>
+    <td><img src="apps/photoshop-cc/icon.svg" width="100"></td><td>Adobe Photoshop<br>(CS6, CC)</td>
   </tr>
   <tr>
-    <td><img src="apps/photoshop-cc/icon.svg" width="100"></td><td>Adobe Photoshop<br>(CS6, CC)</td>
+    <td><img src="apps/premiere-pro-cc/icon.svg" width="100"></td><td>Adobe Premiere Pro<br>(CC)</td>
     <td><img src="apps/cmd/icon.svg" width="100"></td><td>Command Prompt<br>(cmd.exe)</td>
   </tr>
   <tr>
