@@ -178,11 +178,12 @@ After the install process, or on your current RDP server, you will want to:
 
 ### Install virtio-win driver
 The virtual machine uses virtio components, Windows needs the drivers for these devices. 
+
 To install you need:
 
-Download the iso: virtio-win-0.1.xxx.iso (you can find it at fedorapeople.org)
-Mount the iso on the SATA CD-rom device from virt-manager
-In windows open the mounted disk and install: virtio-win-guest-tools.exe
+- Download the iso: virtio-win-0.1.xxx.iso (you can find it at fedorapeople.org)
+- Mount the iso on the SATA CD-rom device from virt-manager
+- In windows open the mounted disk and install: virtio-win-guest-tools.exe
 
 ### Step 5: Connect GNOME/KDE to your Windows VM with shortcuts and file associations
 Lastly, check that FreeRDP can connect with:
