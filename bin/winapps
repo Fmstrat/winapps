@@ -58,6 +58,10 @@ if [ -z "$(which xfreerdp)" ]; then
 	exit
 fi
 
+if [ -z "${VIRT_MACHINE_NAME}" ]; then
+	VIRT_MACHINE_NAME="RDPWindows"
+fi
+
 if [ -z "${RDP_IP}" ]; then
 	if [ -z "$(groups |grep libvirt)" ]; then
 		echo "You are not a member of the libvirt group. Run the below then reboot."
@@ -65,13 +69,24 @@ if [ -z "${RDP_IP}" ]; then
 		echo '  sudo usermod -a -G kvm $(whoami)'
 		exit
 	fi
-	if [ -z "$(virsh list |grep RDPWindows)" ]; then
-		echo "RDPWindows is not running, run:"
-		echo "  virsh start RDPWindows"
+
+	if [ "true" == "${VIRT_NEEDS_SUDO}" ]; then
+		RDP_IP=$(sudo virsh net-dhcp-leases default |awk "/${VIRT_MACHINE_NAME}/ {print \$5}")
+	else
+		RDP_IP=$(virsh net-dhcp-leases default |awk "/${VIRT_MACHINE_NAME}/ {print \$5}")
+	fi
+
+	# Use IP address to determine if running since machine name might not match vm name in virsh list
+	if [ -z "${RDP_IP}" ]; then
+		echo "${VIRT_MACHINE_NAME} is not running, run:"
+		echo "  virsh start ${VIRT_MACHINE_NAME}" # This might not actually match the VM that needs to be started...
 		exit
 	fi
-	RDP_IP=$(virsh net-dhcp-leases default |grep RDPWindows |awk '{print $5}')
 	RDP_IP=${RDP_IP%%\/*}
+
+	if [ "true" == "${VIRT_NEEDS_SUDO}" ]; then
+		echo "RDP_IP=\"${RDP_IP}\"" >> ${HOME}/.config/winapps/winapps.conf
+	fi
 fi
 
 dprint "1:${1}"
