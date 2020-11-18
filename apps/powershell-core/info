@@ -1,0 +1,14 @@
+# GNOME shortcut name
+NAME="Powershell Core"
+
+# Used for descriptions and window class
+FULL_NAME="Microsoft Powershell Core"
+
+# The executable inside windows
+WIN_EXECUTABLE="C:\Program Files\PowerShell\7\pwsh.exe"
+
+# GNOME categories
+CATEGORIES="WinApps;Windows"
+
+# GNOME mimetypes
+MIME_TYPES=""
