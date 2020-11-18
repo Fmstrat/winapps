@@ -83,6 +83,10 @@ if [ -z "${RDP_IP}" ]; then
 		exit
 	fi
 	RDP_IP=${RDP_IP%%\/*}
+
+	if [ "true" == "${VIRT_NEEDS_SUDO}" ]; then
+		echo "RDP_IP=\"${RDP_IP}\"" >> ${HOME}/.config/winapps/winapps.conf
+	fi
 fi
 
 dprint "1:${1}"
