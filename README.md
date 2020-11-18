@@ -91,6 +91,15 @@ RDP_PASS="MyWindowsPassword"
 #RDP_FLAGS=""
 #MULTIMON="true"
 #DEBUG="true"
+#USE_SECRET_TOOL="true"
+```
+
+#### Using Secret Tool for RDP_PASS
+
+You can add the RDP password for lookup using secret tool. Label can be whatever you want it to be.
+
+```bash
+secret-tool store --label='winapps' service winapps
 ```
 
 Options:
