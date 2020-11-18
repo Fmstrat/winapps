@@ -80,6 +80,13 @@ sudo apt-get install -y freerdp2-x11
 git clone https://github.com/Fmstrat/winapps.git
 cd winapps
 ```
+Arch/Linux
+``` bash
+sudo pacman -S freerdp
+git clone https://github.com/Fmstrat/winapps.git
+cd winapps
+```
+
 ### Step 2: Creating your WinApps configuration file
 You will need to create a `~/.config/winapps/winapps.conf` configuration file with the following information in it:
 ``` bash
@@ -109,7 +116,10 @@ You can refer to the [KVM](https://www.linux-kvm.org) documentation for specific
 ``` bash
 sudo apt-get install -y virt-manager
 ```
-
+Arch/Manjaro
+``` bash
+sudo pacman -S virt-manager virt-viewer dnsmasq vde2 bridge-utils openbsd-netcat ebtables iptables
+```
 Now set up KVM to run as your user instead of root and allow it through AppArmor (for Ubuntu 20.04 and above):
 ``` bash
 sudo sed -i "s/#user = "root"/user = "$(id -un)"/g" /etc/libvirt/qemu.conf
@@ -130,6 +140,13 @@ Next, define a VM called RDPWindows from the sample XML file with:
 ``` bash
 virsh define kvm/RDPWindows.xml
 virsh autostart RDPWindows
+virsh start RDPWindows
+```
+Arch/Manjaro
+``` bash
+virsh define kvm/RDPWindowsArch.xml
+virsh autostart RDPWindows
+virsh start RDPWindows
 ```
 
 To increase performance of the VM and decrease resource utilization, read the [Improving Performance](#improving-performance) section.
@@ -138,6 +155,14 @@ You will now want to change any settings on the VM and install Windows and whate
 ``` bash
 virt-manager
 ```
+Arch/Manjaro
+``` bash
+virt-manager
+```
+Options -> File -> Add connection... -> Hypervisor: QEMU/KVM
+check AutoConnect
+Generated URI: qemu:///system
+Connect
 
 #### Option 2 - I already have an RDP server or VM
 If you already have an RDP server or VM, using WinApps is very straight forward. Simply skip to step 4!
@@ -151,6 +176,8 @@ After the install process, or on your current RDP server, you will want to:
 - Go to Settings
     - Under "System", then "Remote Desktop" allow remote connections for RDP
 - Merge `kvm/RDPApps.reg` into the registry to enable RDP Applications
+
+### Install virtio-win driver
 
 ### Step 5: Connect GNOME/KDE to your Windows VM with shortcuts and file associations
 Lastly, check that FreeRDP can connect with:
