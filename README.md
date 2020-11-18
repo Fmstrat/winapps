@@ -63,16 +63,12 @@ Note: The app list below is fueled by the community, and therefore many apps may
     <td><img src="apps/publisher/icon.svg" width="100"></td><td>Microsoft Publisher<br>(2016, 2019, o365)</td>
   </tr>
   <tr>
-    <td><img src="apps/powershell/icon.svg" width="100"></td><td>Powershell</td>
+    <td><img src="apps/powershell/icon.svg" width="100"></td><td>Powershell<br>(Standard, Core)</td>
     <td><img src="apps/proteus-8.8/icon.svg" width="100"></td><td>Proteus 8 (8.8 SP1)</td>
   </tr>
-   <tr>
-    <td><img src="apps/vs-enterprise-2019/icon.svg" width="100"></td><td>Visual Studio<br>(2019 - Ent|Pro|Com)</td>
-    <td>&nbsp;</td><td>&nbsp;</td>
-  </tr>
   <tr>
+    <td><img src="apps/vs-enterprise-2019/icon.svg" width="100"></td><td>Visual Studio<br>(2019 - Ent|Pro|Com)</td>
     <td><img src="icons/windows.svg" width="100"></td><td>Windows<br>(Full RDP session)</td>
-    <td>&nbsp;</td><td>&nbsp;</td>
   </tr>
 </table>
 
@@ -104,6 +100,7 @@ RDP_PASS="MyWindowsPassword"
 #MULTIMON="true"
 #DEBUG="true"
 ```
+The username and password should be a full user account and password, such as the one created when setting up Windows or a domain user. It cannot be a user/PIN combination as those are not valid for RDP access.
 
 Options:
 - When using a pre-existing non-KVM RDP server, you can use the `RDP_IP` to specify it's location
