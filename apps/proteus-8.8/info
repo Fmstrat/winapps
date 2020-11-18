@@ -1,0 +1,13 @@
+# GNOME shortcut name
+NAME="Proteus 8.8"
+
+# Used for descriptions and window class
+FULL_NAME="Proteus 8 Professional v8.8 SP1"
+
+# The executable inside windows
+WIN_EXECUTABLE="C:\Program Files (x86)\Labcenter Electronics\Proteus 8 Professional\BIN\PDS.exe"
+
+# GNOME categories
+CATEGORIES="Labcenter Electronics"
+
+

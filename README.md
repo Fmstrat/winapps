@@ -63,7 +63,11 @@ Note: The app list below is fueled by the community, and therefore many apps may
   </tr>
   <tr>
     <td><img src="apps/powershell/icon.svg" width="100"></td><td>Powershell</td>
+    <td><img src="apps/proteus-8.8/icon.svg" width="100"></td><td>Proteus 8 (8.8 SP1)</td>
+  </tr>
+   <tr>
     <td><img src="apps/vs-enterprise-2019/icon.svg" width="100"></td><td>Visual Studio<br>(2019 - Ent|Pro|Com)</td>
+    <td>&nbsp;</td><td>&nbsp;</td>
   </tr>
   <tr>
     <td><img src="icons/windows.svg" width="100"></td><td>Windows<br>(Full RDP session)</td>
