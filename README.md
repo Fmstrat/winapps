@@ -91,6 +91,8 @@ RDP_PASS="MyWindowsPassword"
 #RDP_FLAGS=""
 #MULTIMON="true"
 #DEBUG="true"
+#VIRT_MACHINE_NAME="machine-name"
+#VIRT_NEEDS_SUDO="true"
 #USE_SECRET_TOOL="true"
 ```
 
