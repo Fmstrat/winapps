@@ -1,0 +1,14 @@
+# GNOME shortcut name
+NAME="Affinity Designer"
+
+# Used for descriptions and window class
+FULL_NAME="Affinity Designer"
+
+# The executable inside windows
+WIN_EXECUTABLE="C:\Program Files\Affinity\Designer\Designer.exe"
+
+# GNOME categories
+CATEGORIES="WinApps;Graphics"
+
+# GNOME mimetypes
+MIME_TYPES="application/octet-stream"
