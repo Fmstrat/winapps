@@ -74,7 +74,7 @@ Note: The app list below is fueled by the community, and therefore many apps may
 ## Installation
 
 ### Step 1: Download the repo and prerequisites
-You will need to store the WinApps repo in a permanent place and not remove it after install. To get things going, use:
+To get things going, use:
 ``` bash
 sudo apt-get install -y freerdp2-x11
 git clone https://github.com/Fmstrat/winapps.git
@@ -155,14 +155,14 @@ virt-manager
 If you already have an RDP server or VM, using WinApps is very straight forward. Simply skip to step 4!
 
 ### Step 4: Configuring your Windows VM
-After the install process, or on your current RDP server, you will want to:
+After the install process, or on your current RDP server, you will want to complete the following steps. These steps should be completed regardless of whether you use a KVM based VM, another virtualization software, or a remote RDP server.
 - Go to the Start Menu
     - Type "About"
     - Open "About"
     - Change the PC name to "RDPWindows" if you are using KVM (This will allow WinApps to detect the local IP)
 - Go to Settings
     - Under "System", then "Remote Desktop" allow remote connections for RDP
-- Merge `kvm/RDPApps.reg` into the registry to enable RDP Applications
+- Merge `install/RDPApps.reg` into the registry to enable RDP Applications
 
 ### Step 5: Connect GNOME/KDE to your Windows VM with shortcuts and file associations
 Lastly, check that FreeRDP can connect with:
@@ -171,16 +171,30 @@ bin/winapps check
 ```
 You will see output from FreeRDP, as well as potentially have to accept the initial certificate. After that, a Windows Explorer window should pop up. You can close this window and press `Ctrl-C` to cancel out of FreeRDP.
 
-If this step fails, try restarting the VM.
+If this step fails, try restarting the VM, or your problem could be related to:
+- You need to accept the security cert the first time you connect (with 'check')
+- Not enabling RDP in the Windows VM
+- Not being able to connect to the IP of the VM
+- Incorrect user credentials in `~/.config/winapps/winapps.conf`
+- Not merging `install/RDPApps.reg` into the VM
 
-Then the final step is to run the installer:
+Then the final step is to run the installer which will prompt you for a system or user install:
 ``` bash
-$ ./installer.sh --user
+$ ./installer.sh
+? Would you like to install for the current user or the whole system? User
 Removing any old configurations... 
 Installing...
   Checking for installed apps in RDP machine (this may take a while)... Finished.
+? How would you like to handle WinApps pre-configured applications? Set up all detected pre-configured applications
+  Configuring Acrobat X Pro... Finished.
+  Configuring Bridge CS6... Finished.
+  Configuring Cmd... Finished.
   Configuring Excel... Finished.
+  Configuring Explorer... Finished.
+  Configuring Internet Explorer... Finished.
+  Configuring Photoshop CS6... Finished.
   Configuring PowerPoint... Finished.
+  Configuring Powershell... Finished.
   Configuring Word... Finished.
   Configuring Windows... Finished.
 Installation complete.
@@ -206,7 +220,8 @@ WinApps offers a manual mode for running applications that are not configured. T
 The installer can be run multiple times, so simply run:
 ``` bash
 $ git pull
-$ ./installer.sh --user
+$ ./installer.sh
+? Would you like to install for the current user or the whole system? User
 Removing any old configurations... 
   Removing /home/fmstrat/.local/share/applications/excel.desktop... Finished.
   Removing /home/fmstrat/.local/share/applications/powerpoint.desktop... Finished.
@@ -218,15 +233,23 @@ Removing any old configurations...
   Removing /home/fmstrat/.local/bin/word... Finished.
 Installing...
   Checking for installed apps in RDP machine (this may take a while)... Finished.
+? How would you like to handle WinApps pre-configured applications? Set up all detected pre-configured applications
+  Configuring Acrobat X Pro... Finished.
+  Configuring Bridge CS6... Finished.
+  Configuring Cmd... Finished.
   Configuring Excel... Finished.
+  Configuring Explorer... Finished.
+  Configuring Internet Explorer... Finished.
+  Configuring Photoshop CS6... Finished.
   Configuring PowerPoint... Finished.
+  Configuring Powershell... Finished.
   Configuring Word... Finished.
   Configuring Windows... Finished.
 Installation complete.
 ```
 
 ## Installer usage
-The following commands can be used to manage your application configurations:
+The following optional commands can be used to manage your application configurations without prompts:
 ``` bash
 ./installer.sh --user                # Configure applications for the current user
 ./installer.sh --system              # Configure applications for the entire system
@@ -253,6 +276,11 @@ to:
   <timer name='hypervclock' present='yes'/>
 </clock>
 ```
+
+## Common issues
+- **Black window**: This is a FreeRDP bug that sometimes comes up. Try restarting the application or rerunning the command. If that doesn't work, ensure you have `MULTIMON` disabled.
+- **Arch Linux Fails to define VM**: We're working on creating a KVM template for Arch, until then, manually create your VM in `virt-manager`
+
 
 ## Shout outs
 - Some icons pulled from
