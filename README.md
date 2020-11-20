@@ -14,7 +14,15 @@ WinApps was created as an easy, one command way to include apps running inside a
 - You can right click on any files in your home directory to open with an application, too
 
 ## Currently supported applications
-Note: The app list below is fueled by the community, and therefore many apps may be untested by the WinApps team.
+### WinApps supports ***ANY*** installed application on your system.
+
+It does this by:
+1. Scanning your system for offically configured applications (below)
+2. Scanning your system for any other EXE files with install records in the Windows Registry
+
+Any officially configured applications will have support for high-resolution icons and mime types for automatically detecting what files can be opened by each application. Any other detected executable files will leverage the icons pulled from the EXE.
+
+Note: The officially configured application list below is fueled by the community, and therefore some apps may be untested by the WinApps team.
 
 <table cellpadding="10" cellspacing="0" border="0">
   <tr>
@@ -180,25 +188,12 @@ If this step fails, try restarting the VM, or your problem could be related to:
 
 Then the final step is to run the installer which will prompt you for a system or user install:
 ``` bash
-$ ./installer.sh
-? Would you like to install for the current user or the whole system? User
-Removing any old configurations... 
-Installing...
-  Checking for installed apps in RDP machine (this may take a while)... Finished.
-? How would you like to handle WinApps pre-configured applications? Set up all detected pre-configured applications
-  Configuring Acrobat X Pro... Finished.
-  Configuring Bridge CS6... Finished.
-  Configuring Cmd... Finished.
-  Configuring Excel... Finished.
-  Configuring Explorer... Finished.
-  Configuring Internet Explorer... Finished.
-  Configuring Photoshop CS6... Finished.
-  Configuring PowerPoint... Finished.
-  Configuring Powershell... Finished.
-  Configuring Word... Finished.
-  Configuring Windows... Finished.
-Installation complete.
+./installer.sh
 ```
+This will take you through the following process:
+
+<img src="demo/installer.gif" width=1000>
+
 
 ## Adding applications
 Adding applications to the installer is easy. Simply copy one of the application configurations in the `apps` folder, and:
@@ -217,38 +212,12 @@ WinApps offers a manual mode for running applications that are not configured. T
 ```
 
 ## Checking for new application support
-The installer can be run multiple times, so simply run:
+The installer can be run multiple times, so simply run the below again and it will remove any current installations and update for the latest applications.
 ``` bash
-$ git pull
-$ ./installer.sh
-? Would you like to install for the current user or the whole system? User
-Removing any old configurations... 
-  Removing /home/fmstrat/.local/share/applications/excel.desktop... Finished.
-  Removing /home/fmstrat/.local/share/applications/powerpoint.desktop... Finished.
-  Removing /home/fmstrat/.local/share/applications/windows.desktop... Finished.
-  Removing /home/fmstrat/.local/share/applications/word.desktop... Finished.
-  Removing /home/fmstrat/.local/bin/excel... Finished.
-  Removing /home/fmstrat/.local/bin/powerpoint... Finished.
-  Removing /home/fmstrat/.local/bin/windows... Finished.
-  Removing /home/fmstrat/.local/bin/word... Finished.
-Installing...
-  Checking for installed apps in RDP machine (this may take a while)... Finished.
-? How would you like to handle WinApps pre-configured applications? Set up all detected pre-configured applications
-  Configuring Acrobat X Pro... Finished.
-  Configuring Bridge CS6... Finished.
-  Configuring Cmd... Finished.
-  Configuring Excel... Finished.
-  Configuring Explorer... Finished.
-  Configuring Internet Explorer... Finished.
-  Configuring Photoshop CS6... Finished.
-  Configuring PowerPoint... Finished.
-  Configuring Powershell... Finished.
-  Configuring Word... Finished.
-  Configuring Windows... Finished.
-Installation complete.
+./installer.sh
 ```
 
-## Installer usage
+## Optional installer command line arguments
 The following optional commands can be used to manage your application configurations without prompts:
 ``` bash
 ./installer.sh --user                # Configure applications for the current user
