@@ -71,11 +71,11 @@ Note: The officially configured application list below is fueled by the communit
   </tr>
   <tr>
     <td><img src="apps/powershell/icon.svg" width="100"></td><td>Powershell<br>(Standard, Core)</td>
-    <td><img src="apps/vs-enterprise-2019/icon.svg" width="100"></td><td>Visual Studio<br>(2019 - Ent|Pro|Com)</td>
+    <td><img src="apps/proteus-8.8/icon.svg" width="100"></td><td>Proteus 8 (8.8 SP1)</td>
   </tr>
   <tr>
+    <td><img src="apps/vs-enterprise-2019/icon.svg" width="100"></td><td>Visual Studio<br>(2019 - Ent|Pro|Com)</td>
     <td><img src="icons/windows.svg" width="100"></td><td>Windows<br>(Full RDP session)</td>
-    <td>&nbsp;</td><td>&nbsp;</td>
   </tr>
 </table>
 
@@ -88,6 +88,13 @@ sudo apt-get install -y freerdp2-x11
 git clone https://github.com/Fmstrat/winapps.git
 cd winapps
 ```
+Arch/Linux
+``` bash
+sudo pacman -S freerdp
+git clone https://github.com/Fmstrat/winapps.git
+cd winapps
+```
+
 ### Step 2: Creating your WinApps configuration file
 You will need to create a `~/.config/winapps/winapps.conf` configuration file with the following information in it:
 ``` bash
@@ -118,7 +125,10 @@ You can refer to the [KVM](https://www.linux-kvm.org) documentation for specific
 ``` bash
 sudo apt-get install -y virt-manager
 ```
-
+Arch/Manjaro
+``` bash
+sudo pacman -S virt-manager virt-viewer dnsmasq vde2 bridge-utils openbsd-netcat ebtables iptables
+```
 Now set up KVM to run as your user instead of root and allow it through AppArmor (for Ubuntu 20.04 and above):
 ``` bash
 sudo sed -i "s/#user = "root"/user = "$(id -un)"/g" /etc/libvirt/qemu.conf
@@ -139,6 +149,13 @@ Next, define a VM called RDPWindows from the sample XML file with:
 ``` bash
 virsh define kvm/RDPWindows.xml
 virsh autostart RDPWindows
+virsh start RDPWindows
+```
+Arch/Manjaro
+``` bash
+virsh define kvm/RDPWindowsArch.xml
+virsh autostart RDPWindows
+virsh start RDPWindows
 ```
 
 To increase performance of the VM and decrease resource utilization, read the [Improving Performance](#improving-performance) section.
@@ -147,6 +164,12 @@ You will now want to change any settings on the VM and install Windows and whate
 ``` bash
 virt-manager
 ```
+Arch/Manjaro
+
+Options -> File -> Add connection... -> Hypervisor: QEMU/KVM
+check AutoConnect
+Generated URI: qemu:///system
+Connect
 
 #### Option 2 - I already have an RDP server or VM
 If you already have an RDP server or VM, using WinApps is very straight forward. Simply skip to step 4!
@@ -160,6 +183,15 @@ After the install process, or on your current RDP server, you will want to compl
 - Go to Settings
     - Under "System", then "Remote Desktop" allow remote connections for RDP
 - Merge `install/RDPApps.reg` into the registry to enable RDP Applications
+
+### Install virtio-win driver
+The virtual machine uses virtio components, Windows needs the drivers for these devices. 
+
+To install you need:
+
+- Download the iso: virtio-win-0.1.xxx.iso (you can find it at fedorapeople.org)
+- Mount the iso on the SATA CD-rom device from virt-manager
+- In windows open the mounted disk and install: virtio-win-guest-tools.exe
 
 ### Step 5: Connect GNOME/KDE to your Windows VM with shortcuts and file associations
 Lastly, check that FreeRDP can connect with:
