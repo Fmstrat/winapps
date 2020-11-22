@@ -20,13 +20,13 @@ else
 	. "${HOME}/.winapps"
 fi
 
-if [ "true" == "${USE_SECRET_TOOL}" ]; then
-	RDP_PASS=$(secret-tool lookup service winapps)
+if [ ! -z "${RDP_SECRET}" ]; then
+	RDP_PASS=$(secret-tool lookup winapps ${RDP_SECRET})
 
 	if [ -z "${RDP_PASS}" ]; then
 		echo "Could not find password in secret-tool"
 		echo "Please run:"
-		echo "secret-tool store --label='winapps' service winapps"
+		echo "secret-tool store --label='winapps' winapps ${RDP_SECRET}"
 		exit
 	fi
 fi
