@@ -172,6 +172,34 @@ The following optional commands can be used to manage your application configura
 ./installer.sh --system --uninstall  # Remove all configured applications for the entire system
 ```
 
+## Enabling audio passthrough via PulseAudio
+
+You have to edit your VM XML, adding the QEMU namespace.
+
+From this:
+```
+<domain type="kvm">
+```
+
+to this:
+```
+<domain xmlns:qemu="http://libvirt.org/schemas/domain/qemu/1.0" type="kvm">
+```
+
+Then, you have to add some QEMU commandline args, right before the `</domain>` node:
+```
+<qemu:commandline>
+    <qemu:arg value="-device"/>
+    <qemu:arg value="ich9-intel-hda,bus=pcie.0,addr=0x1b"/>
+    <qemu:arg value="-device"/>
+    <qemu:arg value="hda-micro,audiodev=hda"/>
+    <qemu:arg value="-audiodev"/>
+    <qemu:arg value="pa,id=hda,server=unix:/run/user/1000/pulse/native"/>
+</qemu:commandline>
+```
+Remove any virtual sound device from your VM, removing them from `virt-manager`.
+After this, you have to edit your `/etc/libvirt/qemu.conf` and set the `user` variable to your user. Reboot your pc and you should have your VM redirecting its audio to your OS.
+
 ## Common issues
 - **Black window**: This is a FreeRDP bug that sometimes comes up. Try restarting the application or rerunning the command. If that doesn't work, ensure you have `MULTIMON` disabled.
 
