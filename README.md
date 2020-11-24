@@ -175,7 +175,7 @@ The following optional commands can be used to manage your application configura
 
 ## Enabling audio passthrough via PulseAudio
 
-You have to edit your VM XML, adding the QEMU namespace.
+First of all, you add `/audio-mode:1` to your `winapps.conf` under `~/.config/winapps`, after that edit your VM XML, adding the QEMU namespace.
 
 From this:
 ```
@@ -187,7 +187,7 @@ to this:
 <domain xmlns:qemu="http://libvirt.org/schemas/domain/qemu/1.0" type="kvm">
 ```
 
-Then, you have to add some QEMU commandline args, right before the `</domain>` node:
+Then, you add some QEMU commandline args, right before the `</domain>` node:
 ```
 <qemu:commandline>
     <qemu:arg value="-device"/>
@@ -199,7 +199,7 @@ Then, you have to add some QEMU commandline args, right before the `</domain>` n
 </qemu:commandline>
 ```
 Remove any virtual sound device from your VM, removing them from `virt-manager`.
-After this, you have to edit your `/etc/libvirt/qemu.conf` and set the `user` variable to your user. Reboot your pc and you should have your VM redirecting its audio to your OS.
+After this, you edit your `/etc/libvirt/qemu.conf` and set the `user` variable to your user. Reboot your pc and you should have your VM redirecting its audio to your OS.
 
 ## Common issues
 - **Black window**: This is a FreeRDP bug that sometimes comes up. Try restarting the application or rerunning the command. If that doesn't work, ensure you have `MULTIMON` disabled.
