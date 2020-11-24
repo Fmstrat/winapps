@@ -1,3 +1,4 @@
+
 # WinApps for Linux
 Run Windows apps such as Microsoft Office/Adobe in Linux (Ubuntu/Fedora) and GNOME/KDE as if they were a part of the native OS, including Nautilus integration for right clicking on files of specific mime types to open them.
 
@@ -114,7 +115,7 @@ Options:
 - If you are running a VM in KVM with NAT enabled, leave `RDP_IP` commented out and WinApps will auto-detect the right local IP
 - For domain users, you can uncomment and change `RDP_DOMAIN`
 - On high-resolution (UHD) displays, you can set `RDP_SCALE` to the scale you would like [100|140|160|180]
-- To add flags to the FreeRDP call, such as `/audio-mode:1` to pass in a mic, use the `RDP_FLAGS` configuration option
+- To add flags to the FreeRDP call, such as `/audio-mode:1` to pass in a mic, use the `RDP_FLAGS` configuration option. For audio passthrough, check [here](#enabling-audio-passthrough-via-pulseaudio)
 - For multi-monitor setups, you can try enabling `MULTIMON`, however if you get a black screen (FreeRDP bug) you will need to revert back
 - If you enable `DEBUG`, a log will be created on each application start in `~/.local/share/winapps/winapps.log`
 
