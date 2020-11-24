@@ -175,7 +175,7 @@ The following optional commands can be used to manage your application configura
 
 ## Enabling audio passthrough via PulseAudio
 
-First of all, you add `/audio-mode:1` to your `winapps.conf` under `~/.config/winapps`, after that edit your VM XML, adding the QEMU namespace.
+First of all, you add the RDP flag `/audio-mode:1` to your `winapps.conf` under `~/.config/winapps`, after that edit your VM XML, adding the QEMU namespace.
 
 From this:
 ```
