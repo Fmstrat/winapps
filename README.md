@@ -107,7 +107,8 @@ RDP_PASS="MyWindowsPassword"
 #MULTIMON="true"
 #DEBUG="true"
 ```
-The username and password should be a full user account and password, such as the one created when setting up Windows or a domain user. It cannot be a user/PIN combination as those are not valid for RDP access.
+The username and password should be a full user account and password, such as the one created when setting up Windows or a domain user. It cannot be a user/PIN combination as those are not valid for RDP access. The password string needs to be properly escaped. For example, if the password is `foo$bar`, it must be specified as `RDP_PASS="foo\$bar"`.
+Take extra care on protecting your config file. It contains your credentials. It is executable. Shit happens.
 
 Options:
 - When using a pre-existing non-KVM RDP server, you can use the `RDP_IP` to specify it's location
