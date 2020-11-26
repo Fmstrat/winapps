@@ -23,7 +23,7 @@ Otherwise, to set up the standard way, open `virt-manager` (Virtual Machines).
 
 ![](kvm/00.png)
 
-Next, go to `Edit`->`Preferences`, and check `Enable XML editing`, then click the `Close` button.
+Next, go to `Edit`->`Preferences`, and check `Enable XML editing`, then click the `Close` button. If you have an older version of virt-manager without support for xml files, you can edit it on `/etc/libvirt/qemu/NAME_OF_THE_VM.xml`.
 
 ![](kvm/01.png)
 
