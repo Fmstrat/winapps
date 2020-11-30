@@ -107,7 +107,7 @@ The installer will then ask you to specify where the driver is located. Select t
 
 ![](kvm/18.png)
 
-Choose the appropriate driver for the OS you have selected, which is most likely the `w10` driver for Windows 10.
+Choose the appropriate driver for the OS you have selected, which is most likely the `w10` driver for Windows 10. Note: If no drivers appeared from the previous step, you might need to select the respective sub-folder for the appropriate driver. For example, Windows 10, 64 bit, select `E:\amd64\w10` folder.
 
 ![](kvm/19.png)
 
