@@ -117,6 +117,9 @@ You will now see a disk you can select for the installation.
 
 Windows will begin to install, and you will likely need to reboot the VM a number times during this process.
 
+**Note:** Remember to set a password for the user. If you don't set a password, you won't be able to connect via RDP later.
+If you forgot to set a password during the installation step, you can still set a password from Windows once the installation is complete.
+
 ![](kvm/21.png)
 
 At some point, you will come to a network screen. This is because the VirtIO drivers for the network have not yet been loaded. Simply click `I don't have internet`.
