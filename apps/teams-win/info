@@ -1,0 +1,14 @@
+# GNOME shortcut name
+NAME="Teams"
+
+# Used for descriptions and window class
+FULL_NAME="Microsoft Teams"
+
+# The executable inside windows
+WIN_EXECUTABLE="C:\Users\tiebe\AppData\Local\Microsoft\Teams\current\Teams.exe"
+
+# GNOME categories
+CATEGORIES="WinApps;Office"
+
+# GNOME mimetypes
+MIME_TYPES="x-scheme-handler/msteams;"
