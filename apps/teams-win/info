@@ -5,7 +5,7 @@ NAME="Teams"
 FULL_NAME="Microsoft Teams"
 
 # The executable inside windows
-WIN_EXECUTABLE="C:\Users\tiebe\AppData\Local\Microsoft\Teams\current\Teams.exe"
+WIN_EXECUTABLE="C:\Users\$RDP_USER\AppData\Local\Microsoft\Teams\current\Teams.exe"
 
 # GNOME categories
 CATEGORIES="WinApps;Office"
