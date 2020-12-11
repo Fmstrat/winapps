@@ -41,6 +41,7 @@ function waFindInstalled() {
 				echo "IF EXIST \"${WIN_EXECUTABLE}\" ECHO ${F} >> \\\\tsclient\\home\\.local\\share\\winapps\\installed.tmp" >> ${HOME}/.local/share/winapps/installed.bat
 			else
 				echo "powershell.exe if (Get-AppxPackage -Name ${UWP_NAME}) { echo ${F} >> \\\\tsclient\\home\\.local\\share\\winapps\\installed.tmp }" >> ${HOME}/.local/share/winapps/installed.bat
+				UWP_NAME=''
 			fi
 		done;
 		echo "powershell.exe -ExecutionPolicy Bypass -File \\\\tsclient\\home\\.local\\share\\winapps\\ExtractPrograms.ps1 > \\\\tsclient\home\\.local\\share\\winapps\\detected" >> ${HOME}/.local/share/winapps/installed.bat
