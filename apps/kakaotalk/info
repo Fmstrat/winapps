@@ -1,0 +1,14 @@
+# GNOME shortcut name
+NAME="KakaoTalk"
+
+# Used for descriptions and window class
+FULL_NAME="KakaoTalk"
+
+# The executable inside windows
+WIN_EXECUTABLE="C:\Program Files (x86)\Kakao\KakaoTalk\KakaoTalk.exe"
+
+# GNOME categories
+CATEGORIES="WinApps"
+
+# GNOME mimetypes
+MIME_TYPES="application/kakaotalk;"
