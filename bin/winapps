@@ -47,6 +47,10 @@ if [ -z "$(which xfreerdp)" ]; then
 	exit
 fi
 
+if [ -z "${RDP_NAME}" ]; then
+	RDP_NAME="RDPWindows"
+fi
+
 if [ -z "${RDP_IP}" ]; then
 	if [ -z "$(groups |grep libvirt)" ]; then
 		echo "You are not a member of the libvirt group. Run the below then reboot."
