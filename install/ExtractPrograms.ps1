@@ -210,6 +210,7 @@ Function Get-Icon {
 Get-ItemProperty "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\*" |
     Select-Object -Property "(default)" -Unique |
     Where-Object {$_."(default)" -ne $null} |
+    Where-Object {Test-Path -Path $_."(default)".Trim('"') -PathType Leaf } |
     ForEach-Object {
         $Exe = $_."(default)".Trim('"')
         $Name = (Get-Item $Exe).VersionInfo.FileDescription.Trim() -replace "  "," "
