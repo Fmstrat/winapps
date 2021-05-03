@@ -172,13 +172,38 @@ The following optional commands can be used to manage your application configura
 ./installer.sh --system --uninstall  # Remove all configured applications for the entire system
 ```
 
+## Installation on Arch Linux
+Although WinApps is not officially supported on Arch Linux, it is still quite easy to get it working with a few minor tweaks. Installing winapps on Arch requires a few additional steps to configure the setup properly:
+
+- **Installing KVM**: if you don't have KVM installed along with `virt-manager` (`virt-manager` will default to LXC connection if QEMU is not installed), follow these steps:
+
+  - Install the required packages: `qemu virt-manager virt-viewer dnsmasq vde2 bridge-utils openbsd-netcat ebtables iptables` using pacman.
+
+  - Install `libguestfs` using the AUR helper you have, such as `yaourt` or `yay` (if you don't have any helper installed, check Arch wiki on instructions regarding its installation).
+
+  - Edit the file `/etc/libvirt/libvirtd.conf` as follows:
+
+    - Change the `unix_sock_group` to `"libvirt"`
+
+    - Set the `unix_sock_rw_perms` to `"0770"`
+
+  - Add your user account to libvirt group using `usermod -a -G libvirt $(whoami)` (if the group doesn't exist, create it using `newgrp libvirt`).
+
+  - After this, you can follow the instructions in the [KVM installation guide](docs/KVM.md) to install Windows VM.
+
+- **Installing WinApps**: Before you follow the guide above to install winapps normally, make sure to set the following configurations:
+
+  - Create a file `~/.config/libvirt/libvirt.conf` and add a single line in it: `uri_default = qemu:///system`. This allows you to run the VM and winapps without using `sudo`.
+
+  - Run the command `virsh net-autostart default` to make sure that the 'default' connection is started after every reboot on Arch.
+
+
 ## Common issues
 - **Black window**: This is a FreeRDP bug that sometimes comes up. Try restarting the application or rerunning the command. If that doesn't work, ensure you have `MULTIMON` disabled.
 
 ## Shout outs
 - Some icons pulled from
-  - Fluent UI React - Icons under [MIT License](https://github.com/Fmstrat/fluent-ui-react/blob/master/LICENSE.md) 
+  - Fluent UI React - Icons under [MIT License](https://github.com/Fmstrat/fluent-ui-react/blob/master/LICENSE.md)
   - Fluent UI - Icons under [MIT License](https://github.com/Fmstrat/fluentui/blob/master/LICENSE) with [restricted use](https://static2.sharepointonline.com/files/fabric/assets/microsoft_fabric_assets_license_agreement_nov_2019.pdf)
   - PKief's VSCode Material Icon Theme - Icons under [MIT License](https://github.com/Fmstrat/vscode-material-icon-theme/blob/master/LICENSE.md)
   - DiemenDesign's LibreICONS - Icons under [MIT License](https://github.com/Fmstrat/LibreICONS/blob/master/LICENSE)
-  
