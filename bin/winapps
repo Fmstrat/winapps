@@ -13,11 +13,23 @@ if [ ! -d "${HOME}/.local/share/winapps" ]; then
 fi
 
 RDP_SCALE=100
+RDP_DEVICE_SCALE=0
 
 if [ -f "${HOME}/.config/winapps/winapps.conf" ]; then
 	. "${HOME}/.config/winapps/winapps.conf"
 else
 	. "${HOME}/.winapps"
+fi
+
+if (( RDP_DEVICE_SCALE < 100 )); then
+	# scale-device (or scale) can only be 100|140|180
+	if (( RDP_SCALE < 120 )); then
+		RDP_DEVICE_SCALE=100
+	elif (( RDP_SCALE > 160)); then
+		RDP_DEVICE_SCALE=180
+	else
+		RDP_DEVICE_SCALE=140
+	fi
 fi
 
 function dprint() {
@@ -70,15 +82,6 @@ dprint "@:${@}"
 MULTI_FLAG="span"
 if [ "${MULTIMON}" = "true" ]; then
 	MULTI_FLAG="multimon"
-fi
-
-# scale-device (or scale) can only be 100|140|180
-if (( RDP_SCALE < 120 )); then
-	RDP_DEVICE_SCALE=100
-elif (( RDP_SCALE > 160)); then
-	RDP_DEVICE_SCALE=180
-else
-	RDP_DEVICE_SCALE=140
 fi
 
 if [ "${1}" = "windows" ]; then
