@@ -182,3 +182,4 @@ The following optional commands can be used to manage your application configura
   - PKief's VSCode Material Icon Theme - Icons under [MIT License](https://github.com/Fmstrat/vscode-material-icon-theme/blob/master/LICENSE.md)
   - DiemenDesign's LibreICONS - Icons under [MIT License](https://github.com/Fmstrat/LibreICONS/blob/master/LICENSE)
   
+  Group Policy Editor under Remote Desktop Session Host -> Remote Session Environment ... set the policy “Use WDDM graphics display driver for Remote Desktop Connections” to DISABLED.
