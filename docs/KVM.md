@@ -200,4 +200,11 @@ sudo ln -s /etc/apparmor.d/usr.sbin.libvirtd /etc/apparmor.d/disable/
 You will likely need to reboot to ensure your current shell is added to the group.
 
 
+## Troubleshoot
+### Black screen while RDP
+This issue may happend in some version of windows, this is related to XDDM vs WDDM display driver model. 
+Resolve this by force to use old XDDM display driver. 
 
+Computer Configuration->Policies->Windows Settings->Administrative Templates->Windows Components->Remote Desktop Services->Remote Desktop Session Host->Remote Session Enviroment], set the Policy [Use WDDM graphics display driver for Remote Desktop Connections] to Disabled
+
+![](kvm/32.png)
