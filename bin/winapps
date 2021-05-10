@@ -87,7 +87,7 @@ elif [ "${1}" = "manual" ]; then
 elif [ "${1}" = "wake" ]; then
   sudo etherwake -i ${IF_NET} ${RDP_MAC}
 elif [ "${1}" = "shutdown" ]; then
-  net rpc shutdown -f -t 0 -C 'shutdown' "${RDP_USER}%${RDP_PASS}" ${RDP_IP}
+  net rpc shutdown -f -t 0 -C 'shutdown' -U "${RDP_USER}%${RDP_PASS}" -I ${RDP_IP}
 elif [ "${1}" != "install" ]; then
 	dprint "DIR:${DIR}"
 	if [ -e "${DIR}/../apps/${1}/info" ]; then
