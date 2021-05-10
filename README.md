@@ -181,5 +181,6 @@ The following optional commands can be used to manage your application configura
   - Fluent UI - Icons under [MIT License](https://github.com/Fmstrat/fluentui/blob/master/LICENSE) with [restricted use](https://static2.sharepointonline.com/files/fabric/assets/microsoft_fabric_assets_license_agreement_nov_2019.pdf)
   - PKief's VSCode Material Icon Theme - Icons under [MIT License](https://github.com/Fmstrat/vscode-material-icon-theme/blob/master/LICENSE.md)
   - DiemenDesign's LibreICONS - Icons under [MIT License](https://github.com/Fmstrat/LibreICONS/blob/master/LICENSE)
-  
+- Some Stackoverflow
+  - [Shutdown windows from linux](https://stackoverflow.com/questions/9936986/shutdown-windows-machine-from-linux-terminal)
   Group Policy Editor under Remote Desktop Session Host -> Remote Session Environment ... set the policy “Use WDDM graphics display driver for Remote Desktop Connections” to DISABLED.
