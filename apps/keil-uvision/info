@@ -1,0 +1,14 @@
+# GNOME shortcut name
+NAME="Keil"
+
+# Used for descriptions and window class
+FULL_NAME="Keil µVision 5"
+
+# The executable inside windows
+WIN_EXECUTABLE="C:\Keil_v5\UV4\UV4.exe"
+
+# GNOME categories
+CATEGORIES="WinApps;Development;IDE"
+
+# GNOME mimetypes
+MIME_TYPES=""
