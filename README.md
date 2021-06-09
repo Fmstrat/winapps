@@ -177,9 +177,7 @@ Although WinApps is not officially supported on Arch Linux, it is still quite ea
 
 - **Installing KVM**: if you don't have KVM installed along with `virt-manager` (`virt-manager` will default to LXC connection if QEMU is not installed), follow these steps:
 
-  - Install the required packages: `qemu virt-manager virt-viewer dnsmasq vde2 bridge-utils openbsd-netcat ebtables iptables` using pacman.
-
-  - Install `libguestfs` using the AUR helper you have, such as `yaourt` or `yay` (if you don't have any helper installed, check Arch wiki on instructions regarding its installation).
+  - Install the required packages: `qemu virt-manager virt-viewer dnsmasq vde2 bridge-utils openbsd-netcat libguestfs ebtables iptables` using pacman.
 
   - Edit the file `/etc/libvirt/libvirtd.conf` as follows:
 
