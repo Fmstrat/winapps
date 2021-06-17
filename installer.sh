@@ -218,8 +218,8 @@ Exec=${BIN_PATH}/winapps windows %F
 Terminal=false
 Type=Application
 Icon=${SYS_PATH}/icons/windows.svg
-StartupWMClass=Micorosoft Windows
-Comment=Micorosoft Windows
+StartupWMClass=Microsoft Windows
+Comment=Microsoft Windows
 Categories=Windows
 " |${SUDO} tee "${APP_PATH}/windows.desktop" > /dev/null
 		${SUDO} rm -f "${BIN_PATH}/windows"
