@@ -191,7 +191,7 @@ Although WinApps is not officially supported on Arch Linux, it is still quite ea
 
 - **Installing WinApps**: Before you follow the guide above to install winapps normally, make sure to set the following configurations:
 
-  - Create a file `~/.config/libvirt/libvirt.conf` and add a single line in it: `uri_default = "qemu:///system"`. This allows you to run the VM and winapps without using `sudo`.
+  - Create a file `~/.config/libvirt/libvirt.conf` and add a single line in it: `uri_default = "qemu:///system"`. This allows you to run the VM and winapps without using `sudo`. (This assumes that the user has performed the previous steps as super user. In case performing this step stops `virt-manager` from accessing the VM, but removing the `libvirt.conf` file lets it work, then skip this step).
 
   - Run the command `virsh net-autostart default` to make sure that the 'default' connection is started after every reboot on Arch.
 
