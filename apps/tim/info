@@ -1,0 +1,14 @@
+# GNOME shortcut name
+NAME="Tim"
+
+# Used for descriptions and window class
+FULL_NAME="Tencent Tim"
+
+# The executable inside windows
+WIN_EXECUTABLE="C:\Program Files (x86)\Tencent\TIM\Bin\TIM.exe"
+
+# GNOME categories
+CATEGORIES="WinApps;Tencent"
+
+# GNOME mimetypes
+MIME_TYPES="application/tencent-tim"
