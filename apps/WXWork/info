@@ -1,0 +1,14 @@
+# GNOME shortcut name
+NAME="WXWork"
+
+# Used for descriptions and window class
+FULL_NAME="WeiXin Work"
+
+# The executable inside windows
+WIN_EXECUTABLE="C:\Program Files (x86)\WXWork\WXWork.exe"
+
+# GNOME categories
+CATEGORIES="WinApps;Tencent"
+
+# GNOME mimetypes
+MIME_TYPES="application/work-wechat;"
