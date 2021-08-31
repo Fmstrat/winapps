@@ -118,6 +118,8 @@ Options:
 - For multi-monitor setups, you can try enabling `MULTIMON`, however if you get a black screen (FreeRDP bug) you will need to revert back
 - If you enable `DEBUG`, a log will be created on each application start in `~/.local/share/winapps/winapps.log`
 
+In order to run your apps without root access, you need to create a file `~/.config/libvirt/libvirt.conf` and write in: `uri_default = "qemu:///system"`.
+
 ### Step 4: Run the WinApps installer
 Lastly, check that FreeRDP can connect with:
 ```
