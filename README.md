@@ -92,7 +92,7 @@ If you already have a Virtual Machine or server you wish to use with WinApps, yo
 To get things going, use:
 ``` bash
 sudo apt-get install -y freerdp2-x11
-git clone https://github.com/Fmstrat/winapps.git
+git clone https://github.com/xiagw/winapps.git
 cd winapps
 ```
 ### Step 3: Creating your WinApps configuration file
