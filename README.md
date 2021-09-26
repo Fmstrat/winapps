@@ -103,7 +103,8 @@ RDP_PASS="MyWindowsPassword"
 #RDP_DOMAIN="MYDOMAIN"
 #RDP_IP="192.168.123.111"
 #RDP_SCALE=100
-#RDP_FLAGS=""
+## fix sound
+# RDP_FLAGS="/sound:sys:alsa"
 #MULTIMON="true"
 #DEBUG="true"
 ```
