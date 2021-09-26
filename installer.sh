@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
 
 MAKEDEMO=0
 USEDEMO=0
@@ -30,23 +30,23 @@ function waInstall() {
 function waFindInstalled() {
 	echo -n "  Checking for installed apps in RDP machine (this may take a while)..."
 	if [ $USEDEMO != 1 ]; then
-		rm -f ${HOME}/.local/share/winapps/installed.bat
-		rm -f ${HOME}/.local/share/winapps/installed.tmp
-		rm -f ${HOME}/.local/share/winapps/installed
-		rm -f ${HOME}/.local/share/winapps/detected
-		cp "${DIR}/install/ExtractPrograms.ps1" ${HOME}/.local/share/winapps/ExtractPrograms.ps1
-		for F in $(ls "${DIR}/apps"); do
+		rm -f "${HOME}"/.local/share/winapps/installed.bat
+		rm -f "${HOME}"/.local/share/winapps/installed.tmp
+		rm -f "${HOME}"/.local/share/winapps/installed
+		rm -f "${HOME}"/.local/share/winapps/detected
+		cp "${DIR}/install/ExtractPrograms.ps1" "${HOME}"/.local/share/winapps/ExtractPrograms.ps1
+		for F in $(find "${DIR}/apps" -maxdepth 1); do
 			. "${DIR}/apps/${F}/info"
-			echo "IF EXIST \"${WIN_EXECUTABLE}\" ECHO ${F} >> \\\\tsclient\\home\\.local\\share\\winapps\\installed.tmp" >> ${HOME}/.local/share/winapps/installed.bat
-		done;
-		echo "powershell.exe -ExecutionPolicy Bypass -File \\\\tsclient\\home\\.local\\share\\winapps\\ExtractPrograms.ps1 > \\\\tsclient\home\\.local\\share\\winapps\\detected" >> ${HOME}/.local/share/winapps/installed.bat
-		echo "RENAME \\\\tsclient\\home\\.local\\share\\winapps\\installed.tmp installed" >> ${HOME}/.local/share/winapps/installed.bat
-		xfreerdp /d:"${RDP_DOMAIN}" /u:"${RDP_USER}" /p:"${RDP_PASS}" /v:${RDP_IP} +auto-reconnect +home-drive -wallpaper /span /wm-class:"RDPInstaller" /app:"C:\Windows\System32\cmd.exe" /app-icon:"${DIR}/../icons/windows.svg" /app-cmd:"/C \\\\tsclient\\home\\.local\\share\\winapps\\installed.bat" 1> /dev/null 2>&1 &
+			echo "IF EXIST \"${WIN_EXECUTABLE}\" ECHO ${F} >> \\\\tsclient\\home\\.local\\share\\winapps\\installed.tmp" >>"${HOME}"/.local/share/winapps/installed.bat
+		done
+		echo "powershell.exe -ExecutionPolicy Bypass -File \\\\tsclient\\home\\.local\\share\\winapps\\ExtractPrograms.ps1 > \\\\tsclient\home\\.local\\share\\winapps\\detected" >>${HOME}/.local/share/winapps/installed.bat
+		echo "RENAME \\\\tsclient\\home\\.local\\share\\winapps\\installed.tmp installed" >>${HOME}/.local/share/winapps/installed.bat
+		xfreerdp /d:"${RDP_DOMAIN}" /u:"${RDP_USER}" /p:"${RDP_PASS}" /v:"${RDP_IP}" +auto-reconnect +home-drive -wallpaper /span /wm-class:"RDPInstaller" /app:"C:\Windows\System32\cmd.exe" /app-icon:"${DIR}/../icons/windows.svg" /app-cmd:"/C \\\\tsclient\\home\\.local\\share\\winapps\\installed.bat" 1>/dev/null 2>&1 &
 		COUNT=0
 		while [ ! -f "${HOME}/.local/share/winapps/installed" ]; do
 			sleep 5
 			COUNT=$((COUNT + 1))
-			if (( COUNT == 15 )); then
+			if ((COUNT == 15)); then
 				echo " Finished."
 				echo ""
 				echo "The RDP connection failed to connect or run. Please confirm FreeRDP can connect with:"
@@ -63,23 +63,23 @@ function waFindInstalled() {
 		done
 		if [ $MAKEDEMO = 1 ]; then
 			rm -rf /tmp/winapps_demo
-			cp -a ${HOME}/.local/share/winapps /tmp/winapps_demo
+			cp -a "${HOME}"/.local/share/winapps /tmp/winapps_demo
 			exit
 		fi
 	else
-		rm -rf ${HOME}/.local/share/winapps
-		cp -a /tmp/winapps_demo ${HOME}/.local/share/winapps
+		rm -rf "${HOME}"/.local/share/winapps
+		cp -a /tmp/winapps_demo "${HOME}"/.local/share/winapps
 		#sleep 3
 	fi
 	echo " Finished."
 }
 
 function waConfigureApp() {
-		. "${SYS_PATH}/apps/${1}/info"
-		echo -n "  Configuring ${NAME}..."
-		if [ ${USEDEMO} != 1 ]; then
-			${SUDO} rm -f "${APP_PATH}/${1}.desktop"
-			echo "[Desktop Entry]
+	. "${SYS_PATH}/apps/${1}/info"
+	echo -n "  Configuring ${NAME}..."
+	if [ ${USEDEMO} != 1 ]; then
+		${SUDO} rm -f "${APP_PATH}/${1}.desktop"
+		echo "[Desktop Entry]
 Name=${NAME}
 Exec=${BIN_PATH}/winapps ${1} %F
 Terminal=false
@@ -89,22 +89,22 @@ StartupWMClass=${FULL_NAME}
 Comment=${FULL_NAME}
 Categories=${CATEGORIES}
 MimeType=${MIME_TYPES}
-" |${SUDO} tee "${APP_PATH}/${1}.desktop" > /dev/null
-			${SUDO} rm -f "${BIN_PATH}/${1}"
-			echo "#!/usr/bin/env bash
-${BIN_PATH}/winapps ${1} $@
-" |${SUDO} tee "${BIN_PATH}/${1}" > /dev/null
-			${SUDO} chmod a+x "${BIN_PATH}/${1}"
-		fi
-		echo " Finished."
+" | ${SUDO} tee "${APP_PATH}/${1}.desktop" >/dev/null
+		${SUDO} rm -f "${BIN_PATH}/${1}"
+		echo "#!/usr/bin/env bash
+${BIN_PATH}/winapps ${1} $*
+" | ${SUDO} tee "${BIN_PATH}/${1}" >/dev/null
+		${SUDO} chmod a+x "${BIN_PATH}/${1}"
+	fi
+	echo " Finished."
 }
 
 function waConfigureApps() {
 	APPS=()
-	for F in $(cat "${HOME}/.local/share/winapps/installed" |sed 's/\r/\n/g'); do
+	for F in $(sed 's/\r/\n/g' "${HOME}/.local/share/winapps/installed"); do
 		. "${DIR}/apps/${F}/info"
 		APPS+=("${FULL_NAME} (${F})")
-		INSTALLED_EXES+=("$(echo "${WIN_EXECUTABLE##*\\}" |tr '[:upper:]' '[:lower:]')")
+		INSTALLED_EXES+=("$(echo "${WIN_EXECUTABLE##*\\}" | tr '[:upper:]' '[:lower:]')")
 	done
 	IFS=$'\n' APPS=($(sort <<<"${APPS[*]}"))
 	unset IFS
@@ -112,17 +112,17 @@ function waConfigureApps() {
 	menuFromArr APP_INSTALL "How would you like to handle WinApps pre-configured applications?" "${OPTIONS[@]}"
 	if [ "${APP_INSTALL}" = "Select which pre-configured applications to set up" ]; then
 		checkbox_input "Which pre-configured apps would you like to set up?" APPS SELECTED_APPS
-		echo "" > "${HOME}/.local/share/winapps/installed"
+		echo "" >"${HOME}/.local/share/winapps/installed"
 		for F in "${SELECTED_APPS[@]}"; do
 			APP="${F##*(}"
 			APP="${APP%%)}"
-			echo "${APP}" >> "${HOME}/.local/share/winapps/installed"
+			echo "${APP}" >>"${HOME}/.local/share/winapps/installed"
 		done
-	fi	
+	fi
 	${SUDO} cp "${DIR}/bin/winapps" "${BIN_PATH}/winapps"
 	COUNT=0
 	if [ "${APP_INSTALL}" != "Do not set up any pre-configured applications" ]; then
-		for F in $(cat "${HOME}/.local/share/winapps/installed" |sed 's/\r/\n/g'); do
+		for F in $(sed 's/\r/\n/g' "${HOME}/.local/share/winapps/installed"); do
 			COUNT=$((COUNT + 1))
 			${SUDO} cp -r "apps/${F}" "${SYS_PATH}/apps"
 			waConfigureApp "${F}" svg
@@ -130,7 +130,7 @@ function waConfigureApps() {
 	fi
 	rm -f "${HOME}/.local/share/winapps/installed"
 	rm -f "${HOME}/.local/share/winapps/installed.bat"
-	if (( $COUNT == 0 )); then
+	if ((COUNT == 0)); then
 		echo "  No configured applications."
 	fi
 }
@@ -142,8 +142,12 @@ function waConfigureDetectedApps() {
 		APPS=()
 		for I in "${!NAMES[@]}"; do
 			EXE=${EXES[$I]##*\\}
-			EXE_LOWER=$(echo "${EXE}" |tr '[:upper:]' '[:lower:]')
-			if ( dlm=$'\x1F' ; IFS="$dlm" ; [[ "$dlm${INSTALLED_EXES[*]}$dlm" != *"$dlm${EXE_LOWER}$dlm"* ]] ) ; then
+			EXE_LOWER=$(echo "${EXE}" | tr '[:upper:]' '[:lower:]')
+			if (
+				dlm=$'\x1F'
+				IFS="$dlm"
+				[[ "$dlm${INSTALLED_EXES[*]}$dlm" != *"$dlm${EXE_LOWER}$dlm"* ]]
+			); then
 				APPS+=("${NAMES[$I]} (${EXE})")
 			fi
 		done
@@ -153,27 +157,27 @@ function waConfigureDetectedApps() {
 		menuFromArr APP_INSTALL "How would you like to handle other detected applications?" "${OPTIONS[@]}"
 		if [ "${APP_INSTALL}" = "Select which applications to set up" ]; then
 			checkbox_input "Which other apps would you like to set up?" APPS SELECTED_APPS
-			echo "" > "${HOME}/.local/share/winapps/installed"
+			echo "" >"${HOME}/.local/share/winapps/installed"
 			for F in "${SELECTED_APPS[@]}"; do
 				EXE="${F##*(}"
 				EXE="${EXE%%)}"
 				APP="${F% (*}"
-				echo "${EXE}|${APP}" >> "${HOME}/.local/share/winapps/installed"
+				echo "${EXE}|${APP}" >>"${HOME}/.local/share/winapps/installed"
 			done
 		elif [ "${APP_INSTALL}" = "Set up all detected applications" ]; then
 			for I in "${!EXES[@]}"; do
 				EXE=${EXES[$I]##*\\}
-				echo "${EXE}|${NAMES[$I]}" >> "${HOME}/.local/share/winapps/installed"
+				echo "${EXE}|${NAMES[$I]}" >>"${HOME}/.local/share/winapps/installed"
 			done
 		fi
 		COUNT=0
 		if [ -f "${HOME}/.local/share/winapps/installed" ]; then
-			while read LINE; do
+			while read -r LINE; do
 				EXE="${LINE%|*}"
 				NAME="${LINE#*|}"
 				for I in "${!NAMES[@]}"; do
 					if [ "${NAME}" = "${NAMES[$I]}" ] && [[ "${EXES[$I]}" == *"\\${EXE}" ]]; then
-						EXE=$(echo "${EXE}" |tr '[:upper:]' '[:lower:]')
+						EXE=$(echo "${EXE}" | tr '[:upper:]' '[:lower:]')
 						${SUDO} mkdir -p "${SYS_PATH}/apps/${EXE}"
 						echo "# GNOME shortcut name
 NAME=\"${NAME}\"
@@ -189,22 +193,21 @@ CATEGORIES=\"WinApps\"
 
 # GNOME mimetypes
 MIME_TYPES=\"\"
-" > "${SYS_PATH}/apps/${EXE}/info"
-						echo "${ICONS[$I]}" | base64 -d > "${SYS_PATH}/apps/${EXE}/icon.ico"
+" >"${SYS_PATH}/apps/${EXE}/info"
+						echo "${ICONS[$I]}" | base64 -d >"${SYS_PATH}/apps/${EXE}/icon.ico"
 						waConfigureApp "${EXE}" ico
 						COUNT=$((COUNT + 1))
 					fi
 				done
-			done < "${HOME}/.local/share/winapps/installed"
+			done <"${HOME}/.local/share/winapps/installed"
 			rm -f "${HOME}/.local/share/winapps/installed"
 		fi
 		rm -f "${HOME}/.local/share/winapps/installed.bat"
-		if (( $COUNT == 0 )); then
+		if ((COUNT == 0)); then
 			echo "  No configured applications."
 		fi
 	fi
 }
-
 
 function waConfigureWindows() {
 	echo -n "  Configuring Windows..."
@@ -218,43 +221,43 @@ Exec=${BIN_PATH}/winapps windows %F
 Terminal=false
 Type=Application
 Icon=${SYS_PATH}/icons/windows.svg
-StartupWMClass=Micorosoft Windows
-Comment=Micorosoft Windows
+StartupWMClass=Microsoft Windows
+Comment=Microsoft Windows
 Categories=Windows
-" |${SUDO} tee "${APP_PATH}/windows.desktop" > /dev/null
+" | ${SUDO} tee "${APP_PATH}/windows.desktop" >/dev/null
 		${SUDO} rm -f "${BIN_PATH}/windows"
 		echo "#!/usr/bin/env bash
 ${BIN_PATH}/winapps windows
-" |${SUDO} tee "/${BIN_PATH}/windows" > /dev/null
+" | ${SUDO} tee "/${BIN_PATH}/windows" >/dev/null
 		${SUDO} chmod a+x "${BIN_PATH}/windows"
 	fi
 	echo " Finished."
 }
 
 function waUninstallUser() {
-	rm -f "${HOME}/.local/bin/winapps"
-	rm -rf "${HOME}/.local/share/winapps"
+	echo "Uninstalling (user)..."
+	rm -rf "${HOME}/.local/share/winapps" "${HOME}/.local/bin/winapps"
 	for F in $(grep -l -d skip "bin/winapps" "${HOME}/.local/share/applications/"*); do
 		echo -n "  Removing ${F}..."
-		${SUDO} rm ${F}
+		${SUDO} rm "${F}"
 		echo " Finished."
 	done
 	for F in $(grep -l -d skip "bin/winapps" "${HOME}/.local/bin/"*); do
 		echo -n "  Removing ${F}..."
-		${SUDO} rm ${F}
+		${SUDO} rm "${F}"
 		echo " Finished."
 	done
 }
 
 function waUninstallSystem() {
-	${SUDO} rm -f "/usr/local/bin/winapps"
-	${SUDO} rm -rf "/usr/local/share/winapps"
+	echo "Uninstalling (system)..."
+	${SUDO} rm -rf "/usr/local/share/winapps" "/usr/local/bin/winapps"
 	for F in $(grep -l -d skip "bin/winapps" "/usr/share/applications/"*); do
 		if [ -z "${SUDO}" ]; then
 			waNoSudo
 		fi
 		echo -n "  Removing ${F}..."
-		${SUDO} rm ${F}
+		${SUDO} rm "${F}"
 		echo " Finished."
 	done
 	for F in $(grep -l -d skip "bin/winapps" "/usr/local/bin/"*); do
@@ -262,7 +265,7 @@ function waUninstallSystem() {
 			waNoSudo
 		fi
 		echo -n "  Removing ${F}..."
-		${SUDO} rm ${F}
+		${SUDO} rm "${F}"
 		echo " Finished."
 	done
 }
@@ -283,43 +286,29 @@ if [ "${INSTALL_TYPE}" = 'User' ]; then
 	BIN_PATH="${HOME}/.local/bin"
 	APP_PATH="${HOME}/.local/share/applications"
 	SYS_PATH="${HOME}/.local/share/winapps"
-	if [ ! -d "${BIN_PATH}" ]; then
-		mkdir "${BIN_PATH}"
-	fi
-	if [ ! -d "${APP_PATH}" ]; then
-		mkdir "${APP_PATH}"
-	fi
-	if [ -n "${2}" ]; then
-		if [ "${2}" = '--uninstall' ]; then
-			# Uninstall
-			echo "Uninstalling..."
-			waUninstallUser
-			exit
-		else
-			usage
-		fi
+	[ -d "${BIN_PATH}" ] || mkdir -p "${BIN_PATH}"
+	[ -d "${APP_PATH}" ] || mkdir -p "${APP_PATH}"
+	[ -d "${SYS_PATH}" ] || mkdir -p "${SYS_PATH}"
+	if [ "${2}" = '--uninstall' ]; then
+		waUninstallUser
+		exit
+	else
+		waUsage
 	fi
 elif [ "${INSTALL_TYPE}" = 'System' ]; then
 	SUDO="sudo"
-	sudo ls > /dev/null
+	sudo ls >/dev/null
 	BIN_PATH="/usr/local/bin"
 	APP_PATH="/usr/share/applications"
 	SYS_PATH="/usr/local/share/winapps"
-	if [ ! -d "${BIN_PATH}" ]; then
-		mkdir "${BIN_PATH}"
-	fi
-	if [ ! -d "${APP_PATH}" ]; then
-		mkdir "${APP_PATH}"
-	fi
-	if [ -n "${2}" ]; then
-		if [ "${2}" = '--uninstall' ]; then
-			# Uninstall
-			echo "Uninstalling..."
-			waUninstallSystem
-			exit
-		else
-			usage
-		fi
+	[ -d "${BIN_PATH}" ] || $SUDO mkdir -p "${BIN_PATH}"
+	[ -d "${APP_PATH}" ] || $SUDO mkdir -p "${APP_PATH}"
+	[ -d "${SYS_PATH}" ] || $SUDO mkdir -p "${SYS_PATH}"
+	if [ "${2}" = '--uninstall' ]; then
+		waUninstallSystem
+		exit
+	else
+		waUsage
 	fi
 fi
 
