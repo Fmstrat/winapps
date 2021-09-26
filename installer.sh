@@ -228,7 +228,7 @@ Categories=Windows
 		${SUDO} rm -f "${BIN_PATH}/windows"
 		echo "#!/usr/bin/env bash
 ${BIN_PATH}/winapps windows
-" | ${SUDO} tee "/${BIN_PATH}/windows" >/dev/null
+" | ${SUDO} tee "${BIN_PATH}/windows" >/dev/null
 		${SUDO} chmod a+x "${BIN_PATH}/windows"
 	fi
 	echo " Finished."
