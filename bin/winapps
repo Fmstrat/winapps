@@ -47,6 +47,10 @@ if [ -z "$(which xfreerdp)" ]; then
 	exit
 fi
 
+if [ -z "${RDP_NAME}" ]; then
+	RDP_NAME="RDPWindows"
+fi
+
 if [ -z "${RDP_IP}" ]; then
 	if [ -z "$(groups |grep libvirt)" ]; then
 		echo "You are not a member of the libvirt group. Run the below then reboot."
@@ -54,12 +58,12 @@ if [ -z "${RDP_IP}" ]; then
 		echo '  sudo usermod -a -G kvm $(whoami)'
 		exit
 	fi
-	if [ -z "$(virsh list |grep RDPWindows)" ]; then
+	if [ -z "$(virsh list |grep ${RDP_NAME})" ]; then
 		echo "RDPWindows is not running, run:"
-		echo "  virsh start RDPWindows"
+		echo "  virsh start ${RDP_NAME}"
 		exit
 	fi
-	RDP_IP=$(virsh net-dhcp-leases default |grep RDPWindows |awk '{print $5}')
+	RDP_IP=$(virsh net-dhcp-leases default |grep ${RDP_NAME} |awk '{print $5}')
 	RDP_IP=${RDP_IP%%\/*}
 fi
 
@@ -80,6 +84,10 @@ elif [ "${1}" = "check" ]; then
 elif [ "${1}" = "manual" ]; then
 	dprint "MANUAL:${2}"
 	xfreerdp ${RDP_FLAGS} /d:"${RDP_DOMAIN}" /u:"${RDP_USER}" /p:"${RDP_PASS}" /v:${RDP_IP} +auto-reconnect +home-drive +clipboard -wallpaper /scale:${RDP_SCALE} /dynamic-resolution /${MULTI_FLAG} /app:"${2}" 1> /dev/null 2>&1 &
+elif [ "${1}" = "wake" ]; then
+  sudo etherwake -i ${IF_NET} ${RDP_MAC}
+elif [ "${1}" = "shutdown" ]; then
+  net rpc shutdown -f -t 0 -C 'shutdown' -U "${RDP_USER}%${RDP_PASS}" -I ${RDP_IP}
 elif [ "${1}" != "install" ]; then
 	dprint "DIR:${DIR}"
 	if [ -e "${DIR}/../apps/${1}/info" ]; then
