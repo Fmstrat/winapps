@@ -1,0 +1,20 @@
+# GNOME shortcut name
+NAME="Windows Terminal"
+
+# Used for descriptions and window class
+FULL_NAME="The new Windows Terminal"
+
+# The executable inside windows
+WIN_EXECUTABLE="explorer.exe"
+
+UWP_NAME="Microsoft.WindowsTerminal"
+
+PACKAGE_FAMILY_NAME="Microsoft.WindowsTerminal_8wekyb3d8bbwe"
+
+APP_ID="App"
+
+# GNOME categories
+CATEGORIES="WinApps;Windows"
+
+# GNOME mimetypes
+MIME_TYPES=""

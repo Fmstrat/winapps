@@ -95,13 +95,26 @@ elif [ "${1}" != "install" ]; then
 		echo "You need to run 'install.sh' first."
 		exit 1
 	fi
+
+	UWP_CMD="shell:appsFolder\\${PACKAGE_FAMILY_NAME}!${APP_ID}"
 	if [ -n "${2}" ]; then
 		dprint "HOME:${HOME}"
 		FILE=$(echo "${2}" | sed 's|'"${HOME}"'|\\\\tsclient\\home|;s|/|\\|g;s|\\|\\\\|g')
 		dprint "FILE:${FILE}"
-		xfreerdp ${RDP_FLAGS} /d:"${RDP_DOMAIN}" /u:"${RDP_USER}" /p:"${RDP_PASS}" /v:${RDP_IP} +auto-reconnect +clipboard +home-drive -wallpaper /scale:${RDP_SCALE} /dynamic-resolution /${MULTI_FLAG} /wm-class:"${FULL_NAME}" /app:"${WIN_EXECUTABLE}" /app-icon:"${ICON}" /app-cmd:"\"${FILE}\"" 1> /dev/null 2>&1 &
+		if [ -z "${PACKAGE_FAMILY_NAME}" ]; then
+			APP_ARGS="\"${FILE}\""
+		else
+			APP_ARGS="${UWP_CMD} \"${FILE}\""
+		fi
+
+		xfreerdp ${RDP_FLAGS} /d:"${RDP_DOMAIN}" /u:"${RDP_USER}" /p:"${RDP_PASS}" /v:${RDP_IP} +auto-reconnect +clipboard +home-drive -wallpaper /scale:${RDP_SCALE} /dynamic-resolution /${MULTI_FLAG} /wm-class:"${FULL_NAME}" /app:"${WIN_EXECUTABLE}" /app-icon:"${ICON}" /app-cmd:"${APP_ARGS}" 1> /dev/null 2>&1 &
 	else
-		xfreerdp ${RDP_FLAGS} /d:"${RDP_DOMAIN}" /u:"${RDP_USER}" /p:"${RDP_PASS}" /v:${RDP_IP} +auto-reconnect +clipboard +home-drive -wallpaper /scale:${RDP_SCALE} /dynamic-resolution /${MULTI_FLAG} /wm-class:"${FULL_NAME}" /app:"${WIN_EXECUTABLE}" /app-icon:"${ICON}" 1> /dev/null 2>&1 &
+		if [ -z "${PACKAGE_FAMILY_NAME}" ]; then
+			APP_ARGS=""
+		else
+			APP_ARGS="${UWP_CMD}"
+		fi
+		xfreerdp ${RDP_FLAGS} /d:"${RDP_DOMAIN}" /u:"${RDP_USER}" /p:"${RDP_PASS}" /v:${RDP_IP} +auto-reconnect +clipboard +home-drive -wallpaper /scale:${RDP_SCALE} /dynamic-resolution /${MULTI_FLAG} /wm-class:"${FULL_NAME}" /app:"${WIN_EXECUTABLE}" /app-icon:"${ICON}" /app-cmd:"${APP_ARGS}" 1> /dev/null 2>&1 &
 	fi
 fi
 
