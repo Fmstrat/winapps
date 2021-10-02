@@ -104,6 +104,8 @@ You will need to create a `~/.config/winapps/winapps.conf` configuration file wi
 RDP_USER="MyWindowsUser"
 RDP_PASS="MyWindowsPassword"
 #RDP_DOMAIN="MYDOMAIN"
+# NOTE: `RDP_IP` must be the VM's IP address, not the `virbr0` interface's IP listed in `ip addr`!
+# You can view the VM's IP address in the virt-manager details.
 #RDP_IP="192.168.123.111"
 #RDP_SCALE=100
 #RDP_FLAGS=""
@@ -180,8 +182,8 @@ The following optional commands can be used to manage your application configura
 
 ## Shout outs
 - Some icons pulled from
-  - Fluent UI React - Icons under [MIT License](https://github.com/Fmstrat/fluent-ui-react/blob/master/LICENSE.md) 
+  - Fluent UI React - Icons under [MIT License](https://github.com/Fmstrat/fluent-ui-react/blob/master/LICENSE.md)
   - Fluent UI - Icons under [MIT License](https://github.com/Fmstrat/fluentui/blob/master/LICENSE) with [restricted use](https://static2.sharepointonline.com/files/fabric/assets/microsoft_fabric_assets_license_agreement_nov_2019.pdf)
   - PKief's VSCode Material Icon Theme - Icons under [MIT License](https://github.com/Fmstrat/vscode-material-icon-theme/blob/master/LICENSE.md)
   - DiemenDesign's LibreICONS - Icons under [MIT License](https://github.com/Fmstrat/LibreICONS/blob/master/LICENSE)
-  
+
