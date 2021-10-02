@@ -109,6 +109,15 @@ RDP_PASS="MyWindowsPassword"
 #RDP_FLAGS=""
 #MULTIMON="true"
 #DEBUG="true"
+#RDP_SECRET="account"
+```
+
+#### Using Secret Tool for RDP_PASS
+
+You can add the RDP password for lookup using secret tool. Label can be whatever you want it to be.
+
+```bash
+secret-tool store --label='winapps' winapps account
 ```
 The username and password should be a full user account and password, such as the one created when setting up Windows or a domain user. It cannot be a user/PIN combination as those are not valid for RDP access.
 
