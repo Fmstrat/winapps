@@ -1,3 +1,4 @@
+
 # WinApps for Linux
 
 ***Looking for maintainers, see: https://github.com/Fmstrat/winapps/issues/269***
@@ -117,7 +118,7 @@ Options:
 - If you are running a VM in KVM with NAT enabled, leave `RDP_IP` commented out and WinApps will auto-detect the right local IP
 - For domain users, you can uncomment and change `RDP_DOMAIN`
 - On high-resolution (UHD) displays, you can set `RDP_SCALE` to the scale you would like [100|140|160|180]
-- To add flags to the FreeRDP call, such as `/audio-mode:1` to pass in a mic, use the `RDP_FLAGS` configuration option
+- To add flags to the FreeRDP call, such as `/audio-mode:1` to pass in a mic, use the `RDP_FLAGS` configuration option. For audio passthrough, check [here](#enabling-audio-passthrough-via-pulseaudio)
 - For multi-monitor setups, you can try enabling `MULTIMON`, however if you get a black screen (FreeRDP bug) you will need to revert back
 - If you enable `DEBUG`, a log will be created on each application start in `~/.local/share/winapps/winapps.log`
 
@@ -174,6 +175,34 @@ The following optional commands can be used to manage your application configura
 ./installer.sh --user --uninstall    # Remove all configured applications for the current user
 ./installer.sh --system --uninstall  # Remove all configured applications for the entire system
 ```
+
+## Enabling audio passthrough via PulseAudio
+
+First of all, you add the RDP flag `/audio-mode:1` to your `winapps.conf` under `~/.config/winapps`, after that edit your VM XML, adding the QEMU namespace.
+
+From this:
+```
+<domain type="kvm">
+```
+
+to this:
+```
+<domain xmlns:qemu="http://libvirt.org/schemas/domain/qemu/1.0" type="kvm">
+```
+
+Then, you add some QEMU commandline args, right before the `</domain>` node:
+```
+<qemu:commandline>
+    <qemu:arg value="-device"/>
+    <qemu:arg value="ich9-intel-hda,bus=pcie.0,addr=0x1b"/>
+    <qemu:arg value="-device"/>
+    <qemu:arg value="hda-micro,audiodev=hda"/>
+    <qemu:arg value="-audiodev"/>
+    <qemu:arg value="pa,id=hda,server=unix:/run/user/1000/pulse/native"/>
+</qemu:commandline>
+```
+Remove any virtual sound device from your VM, removing them from `virt-manager`.
+After this, you edit your `/etc/libvirt/qemu.conf` and set the `user` variable to your user. Reboot your pc and you should have your VM redirecting its audio to your OS.
 
 ## Common issues
 - **Black window**: This is a FreeRDP bug that sometimes comes up. Try restarting the application or rerunning the command. If that doesn't work, ensure you have `MULTIMON` disabled.
