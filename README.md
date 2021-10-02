@@ -106,7 +106,10 @@ RDP_PASS="MyWindowsPassword"
 #RDP_DOMAIN="MYDOMAIN"
 #RDP_IP="192.168.123.111"
 #RDP_SCALE=100
-#RDP_FLAGS=""
+# Uncomment the line below if using a French (AZERTY) keyboard layout:
+#RDP_FLAGS="/kbd:0x0000040C"
+# Run `xfreerdp /kbd-list` in a terminal to see a list of keyboard layout codes.
+
 #MULTIMON="true"
 #DEBUG="true"
 ```
@@ -180,8 +183,8 @@ The following optional commands can be used to manage your application configura
 
 ## Shout outs
 - Some icons pulled from
-  - Fluent UI React - Icons under [MIT License](https://github.com/Fmstrat/fluent-ui-react/blob/master/LICENSE.md) 
+  - Fluent UI React - Icons under [MIT License](https://github.com/Fmstrat/fluent-ui-react/blob/master/LICENSE.md)
   - Fluent UI - Icons under [MIT License](https://github.com/Fmstrat/fluentui/blob/master/LICENSE) with [restricted use](https://static2.sharepointonline.com/files/fabric/assets/microsoft_fabric_assets_license_agreement_nov_2019.pdf)
   - PKief's VSCode Material Icon Theme - Icons under [MIT License](https://github.com/Fmstrat/vscode-material-icon-theme/blob/master/LICENSE.md)
   - DiemenDesign's LibreICONS - Icons under [MIT License](https://github.com/Fmstrat/LibreICONS/blob/master/LICENSE)
-  
+
