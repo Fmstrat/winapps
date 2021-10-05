@@ -1,0 +1,14 @@
+# GNOME shortcut name
+NAME="Affinity Photo"
+
+# Used for descriptions and window class
+FULL_NAME="Affinity Photo"
+
+# The executable inside windows
+WIN_EXECUTABLE="C:\Program Files\Affinity\Photo\Photo.exe"
+
+# GNOME categories
+CATEGORIES="WinApps;Graphics"
+
+# GNOME mimetypes
+MIME_TYPES="application/octet-stream;"
