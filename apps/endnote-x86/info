@@ -1,0 +1,14 @@
+# GNOME shortcut name
+NAME="EndNote"
+
+# Used for descriptions and window class
+FULL_NAME="EndNote 20"
+
+# The executable inside windows
+WIN_EXECUTABLE="C:\Program Files (x86)\EndNote 20\EndNote.EXE"
+
+# GNOME categories
+CATEGORIES="WinApps;Office"
+
+# GNOME mimetypes
+MIME_TYPES="application/msonenote;"
