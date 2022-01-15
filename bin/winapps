@@ -9,7 +9,7 @@ file_conf="${path_conf}/winapps.conf"
 [ -d "$path_conf" ] || mkdir -p "$path_conf"
 [ -d "${path_share}" ] || mkdir -p "$path_share"
 if [ -f "$file_conf" ]; then
-    . "${file_conf}"
+    source "${file_conf}"
 else
     cp "$path_script/../docs/winapps-example.conf" "$file_conf"
     echo "You need to modify $file_conf configuration. Exiting..."
@@ -17,9 +17,13 @@ else
 fi
 
 if ! command -v xfreerdp; then
-    echo "You need xfreerdp!"
-    echo "  sudo apt-get install -y freerdp2-x11"
-    exit
+    if sudo apt-get install -y freerdp2-x11; then
+        echo "Installed xfreerdp"
+    else
+        echo "You need xfreerdp!"
+        echo "  sudo apt-get install -y freerdp2-x11"
+        exit
+    fi
 fi
 
 # DIR="$(dirname "$(readlink -f "$0")")"
@@ -55,8 +59,8 @@ fi
 if [ -z "${RDP_IP}" ]; then
     if ! groups | grep -q libvirt; then
         echo "You are not a member of the libvirt group. Run the below then reboot."
-        echo '  sudo usermod -a -G libvirt $(whoami)'
-        echo '  sudo usermod -a -G kvm $(whoami)'
+        echo "  sudo usermod -a -G libvirt \$(whoami)"
+        echo "  sudo usermod -a -G kvm \$(whoami)"
         exit
     fi
 
@@ -98,13 +102,13 @@ install)
 *)
     debug_log "path_script: ${path_script}"
     if [ -e "${path_script}/../apps/${1}/info" ]; then
-        . "${path_script}/../apps/${1}/info"
+        source "${path_script}/../apps/${1}/info"
         ICON="${path_script}/../apps/${1}/icon.svg"
     elif [ -e "$path_share/apps/${1}/info" ]; then
-        . "$path_share/apps/${1}/info"
+        source "$path_share/apps/${1}/info"
         ICON="$path_share/apps/${1}/icon.svg"
     elif [ -e "/usr/local/share/winapps/apps/${1}/info" ]; then
-        . "/usr/local/share/winapps/apps/${1}/info"
+        source "/usr/local/share/winapps/apps/${1}/info"
         ICON="/usr/local/share/winapps/apps/${1}/icon.svg"
     else
         echo "You need to run 'install.sh' first."
