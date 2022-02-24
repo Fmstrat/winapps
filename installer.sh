@@ -290,11 +290,13 @@ if [ "${INSTALL_TYPE}" = 'User' ]; then
     [ -d "${BIN_PATH}" ] || mkdir -p "${BIN_PATH}"
     [ -d "${APP_PATH}" ] || mkdir -p "${APP_PATH}"
     [ -d "${SYS_PATH}" ] || mkdir -p "${SYS_PATH}"
-    if [ "${2}" = '--uninstall' ]; then
-        waUninstallUser
-        exit
-    else
-        waUsage
+    if [ -n "${2}" ]; then
+        if [ "${2}" = '--uninstall' ]; then
+            waUninstallUser
+            exit
+        else
+            waUsage
+        fi
     fi
 elif [ "${INSTALL_TYPE}" = 'System' ]; then
     SUDO="sudo"
@@ -305,11 +307,13 @@ elif [ "${INSTALL_TYPE}" = 'System' ]; then
     [ -d "${BIN_PATH}" ] || $SUDO mkdir -p "${BIN_PATH}"
     [ -d "${APP_PATH}" ] || $SUDO mkdir -p "${APP_PATH}"
     [ -d "${SYS_PATH}" ] || $SUDO mkdir -p "${SYS_PATH}"
-    if [ "${2}" = '--uninstall' ]; then
-        waUninstallSystem
-        exit
-    else
-        waUsage
+    if [ -n "${2}" ]; then
+        if [ "${2}" = '--uninstall' ]; then
+            waUninstallSystem
+            exit
+        else
+            waUsage
+        fi
     fi
 fi
 
