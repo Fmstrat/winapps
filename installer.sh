@@ -1,48 +1,48 @@
 #!/usr/bin/env bash
 
-DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
+path_script="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
 
 MAKEDEMO=0
 USEDEMO=0
 
-. "${DIR}/install/inquirer.sh"
+. "${path_script}/install/inquirer.sh"
 
 INSTALLED_EXES=()
 
-function waUsage() {
+waUsage() {
     echo 'Usage:
   ./installer.sh --user    # Install everything in ${HOME}
   ./installer.sh --system  # Install everything in /usr'
     exit
 }
 
-function waNoSudo() {
+waNoSudo() {
     echo 'You are attempting to switch from a --system install to a --user install.
 Please run "./installer.sh --system --uninstall" first.'
     exit
 }
 
-function waInstall() {
+waInstall() {
     ${SUDO} mkdir -p "${SYS_PATH}/apps"
-    . "${DIR}/bin/winapps" install
+    . "${path_script}/bin/winapps" install
 }
 
-function waFindInstalled() {
+waFindInstalled() {
     echo -n "  Checking for installed apps in RDP machine (this may take a while)..."
     if [ $USEDEMO != 1 ]; then
         rm -f "${HOME}"/.local/share/winapps/installed.bat
         rm -f "${HOME}"/.local/share/winapps/installed.tmp
         rm -f "${HOME}"/.local/share/winapps/installed
         rm -f "${HOME}"/.local/share/winapps/detected
-        cp "${DIR}/install/ExtractPrograms.ps1" "${HOME}"/.local/share/winapps/ExtractPrograms.ps1
-        for F in $(find "${DIR}/apps" -maxdepth 1); do
-            . "${DIR}/apps/${F}/info"
+        cp "${path_script}/install/ExtractPrograms.ps1" "${HOME}"/.local/share/winapps/ExtractPrograms.ps1
+        for F in $(ls "${path_script}/apps"); do
+            . "${path_script}/apps/${F}/info"
             echo "IF EXIST \"${WIN_EXECUTABLE}\" ECHO ${F} >> \\\\tsclient\\home\\.local\\share\\winapps\\installed.tmp" >>"${HOME}"/.local/share/winapps/installed.bat
         done
         echo "powershell.exe -ExecutionPolicy Bypass -File \\\\tsclient\\home\\.local\\share\\winapps\\ExtractPrograms.ps1 > \\\\tsclient\home\\.local\\share\\winapps\\detected" >>${HOME}/.local/share/winapps/installed.bat
         echo "RENAME \\\\tsclient\\home\\.local\\share\\winapps\\installed.tmp installed" >>${HOME}/.local/share/winapps/installed.bat
         # xfreerdp_opt="xfreerdp ${RDP_FLAGS} /d:${RDP_DOMAIN} /u:${RDP_USER} /p:${RDP_PASS} /v:${RDP_IP} +auto-reconnect +clipboard +home-drive -wallpaper /scale:${RDP_SCALE} /dynamic-resolution"
-        xfreerdp /d:"${RDP_DOMAIN}" /u:"${RDP_USER}" /p:"${RDP_PASS}" /v:"${RDP_IP}" +auto-reconnect +home-drive -wallpaper /span /wm-class:"RDPInstaller" /app:"C:\Windows\System32\cmd.exe" /app-icon:"${DIR}/../icons/windows.svg" /app-cmd:"/C \\\\tsclient\\home\\.local\\share\\winapps\\installed.bat" 1>/dev/null 2>&1 &
+        xfreerdp /d:"${RDP_DOMAIN}" /u:"${RDP_USER}" /p:"${RDP_PASS}" /v:"${RDP_IP}" +auto-reconnect +home-drive -wallpaper /span /wm-class:"RDPInstaller" /app:"C:\Windows\System32\cmd.exe" /app-icon:"${path_script}/../icons/windows.svg" /app-cmd:"/C \\\\tsclient\\home\\.local\\share\\winapps\\installed.bat" 1>/dev/null 2>&1 &
         COUNT=0
         while [ ! -f "${HOME}/.local/share/winapps/installed" ]; do
             sleep 5
@@ -75,7 +75,7 @@ function waFindInstalled() {
     echo " Finished."
 }
 
-function waConfigureApp() {
+waConfigureApp() {
     . "${SYS_PATH}/apps/${1}/info"
     echo -n "  Configuring ${NAME}..."
     if [ ${USEDEMO} != 1 ]; then
@@ -100,10 +100,10 @@ ${BIN_PATH}/winapps ${1} $*
     echo " Finished."
 }
 
-function waConfigureApps() {
+waConfigureApps() {
     APPS=()
     for F in $(sed 's/\r/\n/g' "${HOME}/.local/share/winapps/installed"); do
-        . "${DIR}/apps/${F}/info"
+        . "${path_script}/apps/${F}/info"
         APPS+=("${FULL_NAME} (${F})")
         INSTALLED_EXES+=("$(echo "${WIN_EXECUTABLE##*\\}" | tr '[:upper:]' '[:lower:]')")
     done
@@ -120,7 +120,7 @@ function waConfigureApps() {
             echo "${APP}" >>"${HOME}/.local/share/winapps/installed"
         done
     fi
-    ${SUDO} cp "${DIR}/bin/winapps" "${BIN_PATH}/winapps"
+    ${SUDO} cp "${path_script}/bin/winapps" "${BIN_PATH}/winapps"
     COUNT=0
     if [ "${APP_INSTALL}" != "Do not set up any pre-configured applications" ]; then
         for F in $(sed 's/\r/\n/g' "${HOME}/.local/share/winapps/installed"); do
@@ -136,7 +136,7 @@ function waConfigureApps() {
     fi
 }
 
-function waConfigureDetectedApps() {
+waConfigureDetectedApps() {
     if [ -f "${HOME}/.local/share/winapps/detected" ]; then
         sed -i 's/\r//g' "${HOME}/.local/share/winapps/detected"
         . "${HOME}/.local/share/winapps/detected"
@@ -210,12 +210,12 @@ MIME_TYPES=\"\"
     fi
 }
 
-function waConfigureWindows() {
+waConfigureWindows() {
     echo -n "  Configuring Windows..."
     if [ ${USEDEMO} != 1 ]; then
         ${SUDO} rm -f "${APP_PATH}/windows.desktop"
         ${SUDO} mkdir -p "${SYS_PATH}/icons"
-        ${SUDO} cp "${DIR}/icons/windows.svg" "${SYS_PATH}/icons/windows.svg"
+        ${SUDO} cp "${path_script}/icons/windows.svg" "${SYS_PATH}/icons/windows.svg"
         echo "[Desktop Entry]
 Name=Windows
 Exec=${BIN_PATH}/winapps windows %F
@@ -235,7 +235,7 @@ ${BIN_PATH}/winapps windows
     echo " Finished."
 }
 
-function waUninstallUser() {
+waUninstallUser() {
     echo "Uninstalling (user)..."
     rm -rf "${HOME}/.local/share/winapps" "${HOME}/.local/bin/winapps"
     for F in $(grep -l -d skip "bin/winapps" "${HOME}/.local/share/applications/"*); do
@@ -250,7 +250,7 @@ function waUninstallUser() {
     done
 }
 
-function waUninstallSystem() {
+waUninstallSystem() {
     echo "Uninstalling (system)..."
     ${SUDO} rm -rf "/usr/local/share/winapps" "/usr/local/bin/winapps"
     for F in $(grep -l -d skip "bin/winapps" "/usr/share/applications/"*); do
