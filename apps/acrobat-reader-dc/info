@@ -5,10 +5,10 @@ NAME="Acrobat Reader DC"
 FULL_NAME="Acrobat Reader DC"
 
 # The executable inside windows
-WIN_EXECUTABLE="C:\Program Files (x86)\Adobe\Acrobat Reader DC\Reader\AcroRd32.exe"
+WIN_EXECUTABLE="C:\Program Files (x86)\Adobe\Acrobat DC\Acrobat\Acrobat.exe"
 
 # GNOME categories
-CATEGORIES="WinApps;Documents"
+CATEGORIES="WinApps;Documents"  
 
 # GNOME mimetypes
 MIME_TYPES="application/pdf;"

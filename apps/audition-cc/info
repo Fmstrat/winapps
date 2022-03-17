@@ -5,7 +5,7 @@ NAME="Audition CC"
 FULL_NAME="Adobe Audition CC"
 
 # The executable inside windows
-WIN_EXECUTABLE="C:\Program Files\Adobe\Adobe Audition 2020\Adobe Audition.exe"
+WIN_EXECUTABLE="C:\Program Files\Adobe\Adobe Audition 2022\Adobe Audition.exe"
 
 # GNOME categories
 CATEGORIES="WinApps;Adobe"

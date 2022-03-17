@@ -5,7 +5,7 @@ NAME="After Effects CC"
 FULL_NAME="Adobe After Effects CC"
 
 # The executable inside windows
-WIN_EXECUTABLE="C:\Program Files\Adobe\Adobe After Effects 2020\Support Files\AfterFX.exe"
+WIN_EXECUTABLE="C:\Program Files\Adobe\Adobe After Effects 2022\Support Files\AfterFX.exe"
 
 # GNOME categories
 CATEGORIES="WinApps;Adobe"

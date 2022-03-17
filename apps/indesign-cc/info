@@ -5,7 +5,7 @@ NAME="InDesign CC"
 FULL_NAME="Adobe InDesign CC"
 
 # The executable inside windows
-WIN_EXECUTABLE="C:\Program Files\Adobe\Adobe InDesign 2021\InDesign.exe"
+WIN_EXECUTABLE="C:\Program Files\Adobe\Adobe InDesign 2022\InDesign.exe"
 
 # GNOME categories
 CATEGORIES="WinApps;Adobe"
