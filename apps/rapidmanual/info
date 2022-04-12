@@ -1,0 +1,14 @@
+# GNOME shortcut name
+NAME="RapidManual"
+
+# Used for descriptions and window class
+FULL_NAME="RapidManual"
+
+# The executable inside windows
+WIN_EXECUTABLE="C:\Program Files\ParallelGraphics\RapidManual\RapidManual.exe"
+
+# GNOME categories
+CATEGORIES="WinApps;RapidAuthor"
+
+# GNOME mimetypes
+MIME_TYPES=""

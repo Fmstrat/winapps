@@ -1,0 +1,14 @@
+# GNOME shortcut name
+NAME="RapidCatalog"
+
+# Used for descriptions and window class
+FULL_NAME="RapidCatalog"
+
+# The executable inside windows
+WIN_EXECUTABLE="C:\Program Files\ParallelGraphics\RapidCatalog\RapidCatalog.exe"
+
+# GNOME categories
+CATEGORIES="WinApps;RapidAuthor"
+
+# GNOME mimetypes
+MIME_TYPES=""
