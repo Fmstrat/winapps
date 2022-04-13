@@ -1,0 +1,14 @@
+# GNOME shortcut name
+NAME="Everything"
+
+# Used for descriptions and window class
+FULL_NAME="Everything"
+
+# The executable inside windows
+WIN_EXECUTABLE="c:\Users\User\scoop\apps\everything\current\everything.exe"
+
+# GNOME categories
+CATEGORIES="WinApps;Develop"
+
+# GNOME mimetypes
+MIME_TYPES=""
