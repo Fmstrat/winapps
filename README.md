@@ -203,6 +203,7 @@ Although WinApps is not officially supported on Arch Linux, it is still quite ea
 - **Black window**: This is a FreeRDP bug that sometimes comes up. Try restarting the application or rerunning the command. If that doesn't work, ensure you have `MULTIMON` disabled.
 
 ## Cleanup Scripts windows-lite-1903
+Optimize performance, Delete the built-in program
 https://github.com/xiagw/windows-lite-1903
 ## Shout outs
 - Some icons pulled from
