@@ -35,11 +35,13 @@ waFindInstalled() {
         rm -f "${HOME}"/.local/share/winapps/installed
         rm -f "${HOME}"/.local/share/winapps/detected
         cp "${path_script}/install/ExtractPrograms.ps1" "${HOME}"/.local/share/winapps/ExtractPrograms.ps1
-        for F in $(ls "${path_script}/apps"); do
-            . "${path_script}/apps/${F}/info"
+        for F in "${path_script}/apps/"*; do
+            [ -d "${F}" ] || continue
+            source "${F}/info"
+            F=${F##*/}
             echo "IF EXIST \"${WIN_EXECUTABLE}\" ECHO ${F} >> \\\\tsclient\\home\\.local\\share\\winapps\\installed.tmp" >>"${HOME}"/.local/share/winapps/installed.bat
         done
-        echo "powershell.exe -ExecutionPolicy Bypass -File \\\\tsclient\\home\\.local\\share\\winapps\\ExtractPrograms.ps1 > \\\\tsclient\home\\.local\\share\\winapps\\detected" >>${HOME}/.local/share/winapps/installed.bat
+        echo "powershell.exe -ExecutionPolicy Bypass -File \\\\tsclient\\home\\.local\\share\\winapps\\ExtractPrograms.ps1 > \\\\tsclient\home\\.local\\share\\winapps\\detected" >>"${HOME}"/.local/share/winapps/installed.bat
         echo "RENAME \\\\tsclient\\home\\.local\\share\\winapps\\installed.tmp installed" >>${HOME}/.local/share/winapps/installed.bat
         # xfreerdp_opt="xfreerdp ${RDP_FLAGS} /d:${RDP_DOMAIN} /u:${RDP_USER} /p:${RDP_PASS} /v:${RDP_IP} +auto-reconnect +clipboard +home-drive -wallpaper /scale:${RDP_SCALE} /dynamic-resolution"
         xfreerdp /d:"${RDP_DOMAIN}" /u:"${RDP_USER}" /p:"${RDP_PASS}" /v:"${RDP_IP}" +auto-reconnect +home-drive -wallpaper /span /wm-class:"RDPInstaller" /app:"C:\Windows\System32\cmd.exe" /app-icon:"${path_script}/../icons/windows.svg" /app-cmd:"/C \\\\tsclient\\home\\.local\\share\\winapps\\installed.bat" 1>/dev/null 2>&1 &
