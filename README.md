@@ -1,7 +1,7 @@
 # WinApps for Linux
 Run Windows apps such as Microsoft Office/Adobe in Linux (Ubuntu/Fedora) and GNOME/KDE as if they were a part of the native OS, including Nautilus integration for right clicking on files of specific mime types to open them.
 
-<img src="demo/demo.gif" width=1000>
+<img src="docs/image/demo.gif" width=1000>
 
 ***Proud to have made the top spot on [r/linux](https://www.reddit.com/r/linux) on launch day.***
 
@@ -74,7 +74,7 @@ Note: The officially configured application list below is fueled by the communit
     <td><img src="apps/vs-enterprise-2019/icon.svg" width="100"></td><td>Visual Studio<br>(2019 - Ent|Pro|Com)</td>
   </tr>
   <tr>
-    <td><img src="icons/windows.svg" width="100"></td><td>Windows<br>(Full RDP session)</td>
+    <td><img src="docs/icons/windows.svg" width="100"></td><td>Windows<br>(Full RDP session)</td>
     <td>&nbsp;</td><td>&nbsp;</td>
   </tr>
 </table>
@@ -133,15 +133,15 @@ If this step fails, try restarting the VM, or your problem could be related to:
 - Not enabling RDP in the Windows VM
 - Not being able to connect to the IP of the VM
 - Incorrect user credentials in `~/.config/winapps/winapps.conf`
-- Not merging `install/RDPApps.reg` into the VM
+- Not merging `docs/RDPApps.reg` into the VM
 
 Then the final step is to run the installer which will prompt you for a system or user install:
 ``` bash
-./installer.sh
+./bin/installer.sh
 ```
 This will take you through the following process:
 
-<img src="demo/installer.gif" width=1000>
+<img src="docs/image/installer.gif" width=1000>
 
 
 ## Adding pre-defined applications
@@ -163,16 +163,16 @@ WinApps offers a manual mode for running applications that are not configured. T
 ## Checking for new application support
 The installer can be run multiple times, so simply run the below again and it will remove any current installations and update for the latest applications.
 ``` bash
-./installer.sh
+./bin/installer.sh
 ```
 
 ## Optional installer command line arguments
 The following optional commands can be used to manage your application configurations without prompts:
 ``` bash
-./installer.sh --user                # Configure applications for the current user
-./installer.sh --system              # Configure applications for the entire system
-./installer.sh --user --uninstall    # Remove all configured applications for the current user
-./installer.sh --system --uninstall  # Remove all configured applications for the entire system
+./bin/installer.sh --user                # Configure applications for the current user
+./bin/installer.sh --system              # Configure applications for the entire system
+./bin/installer.sh --user --uninstall    # Remove all configured applications for the current user
+./bin/installer.sh --system --uninstall  # Remove all configured applications for the entire system
 ```
 
 ## Installation on Arch Linux

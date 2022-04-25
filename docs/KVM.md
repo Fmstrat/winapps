@@ -135,7 +135,7 @@ Leave everything as default and click `Next` through the installer. This will in
 
 ![](kvm/25.png)
 
-Once you finish the driver install, you will need to make some registry changes to enable RDP Applications to run on the system. Start by downloading the `RDPApps.reg` file from the WinApps repo by visiting https://github.com/Fmstrat/winapps/blob/main/install/RDPApps.reg, right clicking on the `Raw` button, and clicking on `Save target as`.
+Once you finish the driver install, you will need to make some registry changes to enable RDP Applications to run on the system. Start by downloading the `RDPApps.reg` file from the WinApps repo by visiting https://github.com/Fmstrat/winapps/blob/main/docs/RDPApps.reg, right clicking on the `Raw` button, and clicking on `Save target as`.
 
 ![](kvm/26.png)
 
@@ -176,11 +176,11 @@ You can refer to the [KVM](https://www.linux-kvm.org) documentation for specific
 ``` bash
 sudo apt-get install -y virt-manager
 ```
-Now, copy your Windows ISO and VirtIO iso (links to download in the main guide) into the folder and update the `kvm/RDPWindows.xml` appropriately.
+Now, copy your Windows ISO and VirtIO iso (links to download in the main guide) into the folder and update the `docs/RDPWindows.xml` appropriately.
 
 Next, define a VM called RDPWindows from the sample XML file with:
 ``` bash
-virsh define kvm/RDPWindows.xml
+virsh define docs/RDPWindows.xml
 virsh autostart RDPWindows
 ```
 You should then open the VMs properties in `virt-manager` and ensure that under CPU `Copy host CPU configuration` is selected.
