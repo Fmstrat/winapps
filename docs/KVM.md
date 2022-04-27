@@ -135,7 +135,7 @@ Leave everything as default and click `Next` through the installer. This will in
 
 ![](kvm/25.png)
 
-Once you finish the driver install, you will need to make some registry changes to enable RDP Applications to run on the system. Start by downloading the `RDPApps.reg` file from the WinApps repo by visiting https://github.com/Fmstrat/winapps/blob/main/docs/RDPApps.reg, right clicking on the `Raw` button, and clicking on `Save target as`.
+Once you finish the driver install, you will need to make some registry changes to enable RDP Applications to run on the system. Start by downloading the `RDPApps.reg` file from the WinApps repo by visiting https://github.com/xiagw/winapps/blob/main/docs/RDPApps.reg, right clicking on the `Raw` button, and clicking on `Save target as`.
 
 ![](kvm/26.png)
 
@@ -169,6 +169,10 @@ Once you are finished, restart the VM, but do not log in. Simply close the VM vi
 
 ## Expert installs
 
+## Cleanup Scripts windows-lite-1903
+Optimize performance, Delete the built-in program
+https://github.com/xiagw/windows-lite-1903
+
 ### Define a VM from XML
 This expert guide for XML imports is specific to Ubuntu 20.04 and may not work on all hardware platforms.
 
@@ -190,8 +194,8 @@ Boot it up, install windows, and then [Install the virtual machine](#install-the
 ### Run KVM in user mode
 Now set up KVM to run as your user instead of root and allow it through AppArmor (for Ubuntu 20.04 and above):
 ``` bash
-sudo sed -i "s/#user = "root"/user = "$(id -un)"/g" /etc/libvirt/qemu.conf
-sudo sed -i "s/#group = "root"/group = "$(id -gn)"/g" /etc/libvirt/qemu.conf
+sudo sed -i 's/#user = "root"/user = '"$(id -un)"'/g' /etc/libvirt/qemu.conf
+sudo sed -i 's/#group = "root"/group = '"$(id -gn)"'/g' /etc/libvirt/qemu.conf
 sudo usermod -a -G kvm $(id -un)
 sudo usermod -a -G libvirt $(id -un)
 sudo systemctl restart libvirtd

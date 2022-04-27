@@ -86,7 +86,9 @@ The best solution for running a VM as a subsystem for WinApps would be KVM. KVM 
 
 - [Creating a Virtual Machine in KVM](docs/KVM.md)
 
-If you already have a Virtual Machine or server you wish to use with WinApps, you will need to merge `kvm/RDPApps.reg` into the VM's Windows Registry. If this VM is in KVM and you want to use auto-IP detection, you will need to name the machine `RDPWindows`. Directions for both of these can be found in the guide linked above.
+If you already have a Virtual Machine or server you wish to use with WinApps, you will need to merge `kvm/RDPApps.reg` into the VM's Windows Registry. 
+
+If this VM is in KVM and you want to use auto-IP detection, you will need to name the machine `RDPWindows`. Directions for both of these can be found in the guide linked above.
 
 ### Step 2: Download the repo and prerequisites
 To get things going, use:
@@ -103,7 +105,7 @@ RDP_PASS="MyWindowsPassword"
 #RDP_DOMAIN="MYDOMAIN"
 #RDP_IP="192.168.123.111"
 #RDP_SCALE=100
-## fix sound
+## ubuntu 20.04, fix sound
 # RDP_FLAGS="/sound:sys:alsa"
 #MULTIMON="true"
 #DEBUG="true"
@@ -118,8 +120,7 @@ Options:
 - To add flags to the FreeRDP call, such as `/audio-mode:1` to pass in a mic, use the `RDP_FLAGS` configuration option
 - For multi-monitor setups, you can try enabling `MULTIMON`, however if you get a black screen (FreeRDP bug) you will need to revert back
 - If you enable `DEBUG`, a log will be created on each application start in `~/.local/share/winapps/winapps.log`
-
-In order to run your apps without root access, you need to create a file `~/.config/libvirt/libvirt.conf` and write in: `uri_default = "qemu:///system"`.
+- In order to run your apps without root access, you need to create a file `~/.config/libvirt/libvirt.conf` and write in: `uri_default = "qemu:///system"`.
 
 ### Step 4: Run the WinApps installer
 Lastly, check that FreeRDP can connect with:
@@ -205,6 +206,7 @@ Although WinApps is not officially supported on Arch Linux, it is still quite ea
 ## Cleanup Scripts windows-lite-1903
 Optimize performance, Delete the built-in program
 https://github.com/xiagw/windows-lite-1903
+
 ## Shout outs
 - Some icons pulled from
   - Fluent UI React - Icons under [MIT License](https://github.com/Fmstrat/fluent-ui-react/blob/master/LICENSE.md)
