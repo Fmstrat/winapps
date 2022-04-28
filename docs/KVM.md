@@ -194,8 +194,8 @@ Boot it up, install windows, and then [Install the virtual machine](#install-the
 ### Run KVM in user mode
 Now set up KVM to run as your user instead of root and allow it through AppArmor (for Ubuntu 20.04 and above):
 ``` bash
-sudo sed -i 's/#user = "root"/user = '"$(id -un)"'/g' /etc/libvirt/qemu.conf
-sudo sed -i 's/#group = "root"/group = '"$(id -gn)"'/g' /etc/libvirt/qemu.conf
+sudo sed -i 's/#user = "root"/user = '"\"$(id -un)\""'/g' /etc/libvirt/qemu.conf
+sudo sed -i 's/#group = "root"/group = '"\"$(id -gn)\""'/g' /etc/libvirt/qemu.conf
 sudo usermod -a -G kvm $(id -un)
 sudo usermod -a -G libvirt $(id -un)
 sudo systemctl restart libvirtd
