@@ -86,7 +86,7 @@ The best solution for running a VM as a subsystem for WinApps would be KVM. KVM 
 
 - [Creating a Virtual Machine in KVM](docs/KVM.md)
 
-If you already have a Virtual Machine or server you wish to use with WinApps, you will need to merge `docs/RDPApps.reg` into the VM's Windows Registry. 
+If you already have a Virtual Machine or server you wish to use with WinApps, you will need to merge `docs/RDPApps.reg` into the VM's Windows Registry.
 
 If this VM is in KVM and you want to use auto-IP detection, you will need to name the machine `RDPWindows`. Directions for both of these can be found in the guide linked above.
 
@@ -100,7 +100,9 @@ cd winapps
 ### Step 3: Creating your WinApps configuration file
 You will need to create a `~/.config/winapps/winapps.conf` configuration file with the following information in it:
 ``` bash
+## !!! CHANGE ME !!! your windows logon name
 RDP_USER="MyWindowsUser"
+## !!! CHANGE ME !!! your windows password
 RDP_PASS="MyWindowsPassword"
 #RDP_DOMAIN="MYDOMAIN"
 #RDP_IP="192.168.123.111"
