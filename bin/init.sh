@@ -4,14 +4,13 @@ path_script="$(cd "$(dirname "$0")" && pwd)"
 
 command -v virt-manager || sudo apt-get install -y virt-manager
 
-
-virsh define $path_script/../docs/RDPWindows.xml
+virsh define "$path_script"/../docs/RDPWindows.xml
 virsh autostart RDPWindows
 
 # sudo sed -i 's/#user = "root"/user = '"\"$(id -un)\""'/g' /etc/libvirt/qemu.conf
 # sudo sed -i 's/#group = "root"/group = '"\"$(id -gn)\""'/g' /etc/libvirt/qemu.conf
-sudo usermod -a -G kvm $(id -un)
-sudo usermod -a -G libvirt $(id -un)
+sudo usermod -a -G kvm "$(id -un)"
+sudo usermod -a -G libvirt "$(id -un)"
 sudo systemctl restart libvirtd
 sudo ln -s /etc/apparmor.d/usr.sbin.libvirtd /etc/apparmor.d/disable/
 # sudo reboot

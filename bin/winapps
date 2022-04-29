@@ -40,12 +40,12 @@ function debug_log() {
 debug_log "START"
 
 if [ -f "$path_share/run" ]; then
-    LAST_RAN=$(stat -t -c %Y "$path_share/run")
-    debug_log "LAST_RAN:${LAST_RAN}"
+    last_run=$(stat -t -c %Y "$path_share/run")
+    debug_log "last_run:${last_run}"
     touch "$path_share/run"
-    THIS_RUN=$(stat -t -c %Y "$path_share/run")
-    debug_log "THIS_RUN:${THIS_RUN}"
-    if ((THIS_RUN - LAST_RAN < 2)); then
+    this_run=$(stat -t -c %Y "$path_share/run")
+    debug_log "this_run:${this_run}"
+    if ((this_run - last_run < 2)); then
         exit
     fi
 else
