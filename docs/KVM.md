@@ -200,6 +200,7 @@ sudo usermod -a -G kvm $(id -un)
 sudo usermod -a -G libvirt $(id -un)
 sudo systemctl restart libvirtd
 sudo ln -s /etc/apparmor.d/usr.sbin.libvirtd /etc/apparmor.d/disable/
+sudo reboot
 ```
 You will likely need to reboot to ensure your current shell is added to the group.
 
