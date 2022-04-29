@@ -5,7 +5,7 @@ path_script="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
 MAKEDEMO=0
 USEDEMO=0
 
-. "${path_script}/inquirer.sh"
+source "${path_script}/inquirer.sh"
 
 INSTALLED_EXES=()
 
@@ -44,7 +44,7 @@ _wa_find_installed() {
         echo "powershell.exe -ExecutionPolicy Bypass -File \\\\tsclient\\home\\.local\\share\\winapps\\ExtractPrograms.ps1 > \\\\tsclient\home\\.local\\share\\winapps\\detected" >>"${HOME}"/.local/share/winapps/installed.bat
         echo "RENAME \\\\tsclient\\home\\.local\\share\\winapps\\installed.tmp installed" >>${HOME}/.local/share/winapps/installed.bat
         # xfreerdp_opt="xfreerdp ${RDP_FLAGS} /d:${RDP_DOMAIN} /u:${RDP_USER} /p:${RDP_PASS} /v:${RDP_IP} +auto-reconnect +clipboard +home-drive -wallpaper /scale:${RDP_SCALE} /dynamic-resolution"
-        xfreerdp /d:"${RDP_DOMAIN}" /u:"${RDP_USER}" /p:"${RDP_PASS}" /v:"${RDP_IP}" +auto-reconnect +home-drive -wallpaper /span /wm-class:"RDPInstaller" /app:"C:\Windows\System32\cmd.exe" /app-icon:"${path_script}/../docs/icons/windows.svg" /app-cmd:"/C \\\\tsclient\\home\\.local\\share\\winapps\\installed.bat" 1>/dev/null 2>&1 &
+        xfreerdp /d:"${RDP_DOMAIN}" /u:"${RDP_USER}" /p:"${RDP_PASS}" /v:"${RDP_IP}" +decorations /cert-ignore +auto-reconnect +home-drive -wallpaper /span /wm-class:"RDPInstaller" /app:"C:\Windows\System32\cmd.exe" /app-icon:"${path_script}/../docs/icons/windows.svg" /app-cmd:"/C \\\\tsclient\\home\\.local\\share\\winapps\\installed.bat" 1>/dev/null 2>&1 &
         COUNT=0
         while [ ! -f "${HOME}/.local/share/winapps/installed" ]; do
             sleep 5

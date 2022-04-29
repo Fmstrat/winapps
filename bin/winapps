@@ -16,7 +16,7 @@ else
     exit
 fi
 
-if ! command -v xfreerdp; then
+if ! command -v xfreerdp >/dev/null; then
     if sudo apt-get install -y freerdp2-x11; then
         echo "Installed xfreerdp"
     else
@@ -74,27 +74,27 @@ if [ -z "${RDP_IP}" ]; then
 fi
 
 if [ "${MULTIMON}" = "true" ]; then
-    MULTI_FLAG="multimon"
+    MULTI_FLAG="/multimon"
 else
-    MULTI_FLAG="span"
+    MULTI_FLAG="/span"
 fi
 
 debug_log "1:${1}"
 debug_log "2:${2}"
 debug_log "@:$*"
 
-xfreerdp_opt="xfreerdp ${RDP_FLAGS} /d:${RDP_DOMAIN} /u:${RDP_USER} /p:${RDP_PASS} /v:${RDP_IP} +auto-reconnect +clipboard +home-drive -wallpaper /scale:${RDP_SCALE} /dynamic-resolution"
+xfreerdp_opt="xfreerdp ${RDP_FLAGS} /d:${RDP_DOMAIN} /u:${RDP_USER} /p:${RDP_PASS} /v:${RDP_IP} +decorations /cert-ignore +auto-reconnect +clipboard +home-drive -wallpaper /scale:${RDP_SCALE} /dynamic-resolution"
 case $1 in
 windows)
     $xfreerdp_opt /wm-class:"Microsoft Windows" >/dev/null 2>&1 &
     ;;
 check)
     debug_log "CHECK"
-    $xfreerdp_opt /${MULTI_FLAG} /app:"explorer.exe"
+    $xfreerdp_opt ${MULTI_FLAG} /app:"explorer.exe"
     ;;
 manual)
     debug_log "MANUAL:${2}"
-    $xfreerdp_opt /${MULTI_FLAG} /app:"${2}" >/dev/null 2>&1 &
+    $xfreerdp_opt ${MULTI_FLAG} /app:"${2}" >/dev/null 2>&1 &
     ;;
 install)
     :
@@ -118,9 +118,9 @@ install)
         debug_log "HOME:${HOME}"
         FILE=$(echo "${2}" | sed 's|'"${HOME}"'|\\\\tsclient\\home|;s|/|\\|g;s|\\|\\\\|g')
         debug_log "FILE:${FILE}"
-        $xfreerdp_opt /${MULTI_FLAG} /wm-class:"${FULL_NAME}" /app:"${WIN_EXECUTABLE}" /app-icon:"${ICON}" /app-cmd:"\"${FILE}\"" >/dev/null 2>&1 &
+        $xfreerdp_opt ${MULTI_FLAG} /wm-class:"${FULL_NAME}" /app:"${WIN_EXECUTABLE}" /app-icon:"${ICON}" /app-cmd:"\"${FILE}\"" >/dev/null 2>&1 &
     else
-        $xfreerdp_opt /${MULTI_FLAG} /wm-class:"${FULL_NAME}" /app:"${WIN_EXECUTABLE}" /app-icon:"${ICON}" 1>/dev/null 2>&1 &
+        $xfreerdp_opt ${MULTI_FLAG} /wm-class:"${FULL_NAME}" /app:"${WIN_EXECUTABLE}" /app-icon:"${ICON}" 1>/dev/null 2>&1 &
     fi
     ;;
 esac
