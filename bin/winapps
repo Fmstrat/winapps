@@ -83,7 +83,7 @@ debug_log "1:${1}"
 debug_log "2:${2}"
 debug_log "@:$*"
 
-xfreerdp_opt="xfreerdp ${RDP_FLAGS} /d:${RDP_DOMAIN} /u:${RDP_USER} /p:${RDP_PASS} /v:${RDP_IP} +decorations /cert-ignore +auto-reconnect +clipboard +home-drive -wallpaper /scale:${RDP_SCALE} /dynamic-resolution"
+xfreerdp_opt="xfreerdp ${RDP_FLAGS} /d:${RDP_DOMAIN} /u:${RDP_USER} /p:${RDP_PASS} /v:${RDP_IP} -decorations /cert:ignore +auto-reconnect +clipboard +home-drive -wallpaper /scale:${RDP_SCALE} /dynamic-resolution"
 case $1 in
 windows)
     $xfreerdp_opt /wm-class:"Microsoft Windows" >/dev/null 2>&1 &
