@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 path_script="$(cd "$(dirname "$0")" && pwd)"
+# DIR="$(dirname "$(readlink -f "$0")")"
 path_conf="${HOME}/.config/winapps"
 path_share="${HOME}/.local/share/winapps"
 # path_conf_home="${HOME}/.winapps"
@@ -26,14 +27,9 @@ if ! command -v xfreerdp >/dev/null; then
     fi
 fi
 
-# DIR="$(dirname "$(readlink -f "$0")")"
-RUN="$(date)-${RANDOM}"
-
-RDP_SCALE=100
-
-function debug_log() {
+debug_log() {
     if [ "${DEBUG}" = "true" ]; then
-        echo "[${RUN}] ${1}" >>"$path_share/winapps.log"
+        echo "[$(date)-${RANDOM}] ${1}" >>"$path_share/winapps.log"
     fi
 }
 
@@ -52,9 +48,7 @@ else
     touch "$path_share/run"
 fi
 
-if [ -z "${RDP_NAME}" ]; then
-    RDP_NAME="RDPWindows"
-fi
+RDP_NAME="${RDP_NAME:-RDPWindows}"
 
 if [ -z "${RDP_IP}" ]; then
     if ! groups | grep -q libvirt; then
@@ -83,7 +77,8 @@ debug_log "1:${1}"
 debug_log "2:${2}"
 debug_log "@:$*"
 
-xfreerdp_opt="xfreerdp ${RDP_FLAGS} /d:${RDP_DOMAIN} /u:${RDP_USER} /p:${RDP_PASS} /v:${RDP_IP} -decorations /cert:ignore +auto-reconnect +clipboard +home-drive -wallpaper /scale:${RDP_SCALE} /dynamic-resolution"
+
+xfreerdp_opt="xfreerdp ${RDP_FLAGS} /d:${RDP_DOMAIN} /u:${RDP_USER} /p:${RDP_PASS} /v:${RDP_IP} -decorations /cert:ignore +auto-reconnect +clipboard +home-drive -wallpaper /scale:${RDP_SCALE:-100} /dynamic-resolution"
 case $1 in
 windows)
     $xfreerdp_opt /wm-class:"Microsoft Windows" >/dev/null 2>&1 &
