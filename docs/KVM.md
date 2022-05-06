@@ -101,6 +101,8 @@ From here out you will install Windows 10 Professional as you would on any other
 
 Once you get to the point of selecting the location for installation, you will see there are no disks available. This is because we need to load the VirtIO driver. Select `Load driver`.
 
+**Warning: Make Sure to select Win 10 Pro (as you need remote desktop feature)**
+
 ![](kvm/17.png)
 
 The installer will then ask you to specify where the driver is located. Select the `E:\` drive or whichever drive the VirtIO driver ISO is located on.
