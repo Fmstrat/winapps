@@ -35,17 +35,14 @@ debug_log() {
 
 debug_log "START"
 
-if [ -f "$path_share/run" ]; then
-    last_run=$(stat -t -c %Y "$path_share/run")
-    debug_log "last_run:${last_run}"
-    touch "$path_share/run"
-    this_run=$(stat -t -c %Y "$path_share/run")
-    debug_log "this_run:${this_run}"
-    if ((this_run - last_run < 2)); then
-        exit
-    fi
-else
-    touch "$path_share/run"
+last_run=$(stat -t -c %Y "$path_share/run")
+debug_log "last_run:${last_run}"
+touch "$path_share/run"
+this_run=$(stat -t -c %Y "$path_share/run")
+debug_log "this_run:${this_run}"
+if ((this_run - last_run < 2)); then
+    echo "time too short"
+    exit 1
 fi
 
 RDP_NAME="${RDP_NAME:-RDPWindows}"
@@ -77,7 +74,6 @@ debug_log "1:${1}"
 debug_log "2:${2}"
 debug_log "@:$*"
 
-
 xfreerdp_opt="xfreerdp ${RDP_FLAGS} /d:${RDP_DOMAIN} /u:${RDP_USER} /p:${RDP_PASS} /v:${RDP_IP} -decorations /cert:ignore +auto-reconnect +clipboard +home-drive -wallpaper /scale:${RDP_SCALE:-100} /dynamic-resolution"
 case $1 in
 windows)
@@ -106,7 +102,7 @@ install)
         source "/usr/local/share/winapps/apps/${1}/info"
         ICON="/usr/local/share/winapps/apps/${1}/icon.svg"
     else
-        echo "You need to run 'install.sh' first."
+        echo "You need to run 'installer.sh' first."
         exit 1
     fi
     if [ -n "${2}" ]; then
