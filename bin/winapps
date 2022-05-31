@@ -7,6 +7,12 @@ path_share="${HOME}/.local/share/winapps"
 # path_conf_home="${HOME}/.winapps"
 file_conf="${path_conf}/winapps.conf"
 
+debug_log() {
+    if [ "${DEBUG}" = "true" ]; then
+        echo "[$(date)-${RANDOM}] $*" >>"$path_share/winapps.log"
+    fi
+}
+
 [ -d "$path_conf" ] || mkdir -p "$path_conf"
 [ -d "${path_share}" ] || mkdir -p "$path_share"
 if [ -f "$file_conf" ]; then
@@ -26,12 +32,6 @@ if ! command -v xfreerdp >/dev/null; then
         exit
     fi
 fi
-
-debug_log() {
-    if [ "${DEBUG}" = "true" ]; then
-        echo "[$(date)-${RANDOM}] ${1}" >>"$path_share/winapps.log"
-    fi
-}
 
 debug_log "START"
 

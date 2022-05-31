@@ -136,6 +136,11 @@ Leave everything as default and click `Next` through the installer. This will in
 ![](kvm/25.png)
 
 Once you finish the driver install, you will need to make some registry changes to enable RDP Applications to run on the system. Start by downloading the `RDPApps.reg` file from the WinApps repo by visiting https://github.com/xiagw/winapps/blob/main/docs/RDPApps.reg, right clicking on the `Raw` button, and clicking on `Save target as`.
+```
+# wget https://raw.githubusercontent.com/xiagw/winapps/main/docs/RDPApps.reg
+# curl -LO https://raw.githubusercontent.com/xiagw/winapps/main/docs/RDPApps.reg
+# reg import RDPApps.reg
+```
 
 ![](kvm/26.png)
 
