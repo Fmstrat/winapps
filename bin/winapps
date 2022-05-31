@@ -50,8 +50,8 @@ RDP_NAME="${RDP_NAME:-RDPWindows}"
 if [ -z "${RDP_IP}" ]; then
     if ! groups | grep -q libvirt; then
         echo "You are not a member of the libvirt group. Run the below then reboot."
-        echo "  sudo usermod -a -G libvirt \$(whoami)"
-        echo "  sudo usermod -a -G kvm \$(whoami)"
+        echo "  sudo usermod -a -G libvirt $(whoami)"
+        echo "  sudo usermod -a -G kvm $(whoami)"
         exit
     fi
 
@@ -102,7 +102,7 @@ install)
         source "/usr/local/share/winapps/apps/${1}/info"
         ICON="/usr/local/share/winapps/apps/${1}/icon.svg"
     else
-        echo "You need to run 'installer.sh' first."
+        echo "You need to run 'bin/installer.sh' first."
         exit 1
     fi
     if [ -n "${2}" ]; then
