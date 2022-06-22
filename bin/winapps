@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-path_script="$(cd "$(dirname "$0")" && pwd)"
-# DIR="$(dirname "$(readlink -f "$0")")"
+# path_script="$(cd "$(dirname "$0")" && pwd)"
+path_script="$(dirname "$(readlink -f "$0")")"
 path_conf="${HOME}/.config/winapps"
 path_share="${HOME}/.local/share/winapps"
 # path_conf_home="${HOME}/.winapps"
@@ -19,7 +19,7 @@ if [ -f "$file_conf" ]; then
     source "${file_conf}"
 else
     cp "$path_script/../docs/winapps-example.conf" "$file_conf"
-    echo "You need to modify $file_conf configuration. Exiting..."
+    echo "Change $file_conf configuration. Exiting..."
     exit
 fi
 
