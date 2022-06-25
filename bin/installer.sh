@@ -1,11 +1,12 @@
 #!/usr/bin/env bash
 
-path_script="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
+# script_path="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
+script_path="$(dirname "$(readlink -f "$0")")"
 
 MAKEDEMO=0
 USEDEMO=0
 
-source "${path_script}/inquirer.sh"
+source "${script_path}/inquirer.sh"
 
 INSTALLED_EXES=()
 
@@ -24,7 +25,7 @@ Please run "./bin/installer.sh --system --uninstall" first.'
 
 _wa_install() {
     ${SUDO} mkdir -p "${SYS_PATH}/apps"
-    source "${path_script}/winapps" install
+    source "${script_path}/winapps" install
 }
 
 _wa_find_installed() {
@@ -34,8 +35,8 @@ _wa_find_installed() {
         rm -f "${HOME}"/.local/share/winapps/installed.tmp
         rm -f "${HOME}"/.local/share/winapps/installed
         rm -f "${HOME}"/.local/share/winapps/detected
-        cp "${path_script}/ExtractPrograms.ps1" "${HOME}"/.local/share/winapps/ExtractPrograms.ps1
-        for F in "${path_script}/../apps/"*; do
+        cp "${script_path}/ExtractPrograms.ps1" "${HOME}"/.local/share/winapps/ExtractPrograms.ps1
+        for F in "${script_path}/../apps/"*; do
             [ -d "${F}" ] || continue
             source "${F}/info"
             F=${F##*/}
@@ -44,7 +45,7 @@ _wa_find_installed() {
         echo "powershell.exe -ExecutionPolicy Bypass -File \\\\tsclient\\home\\.local\\share\\winapps\\ExtractPrograms.ps1 > \\\\tsclient\home\\.local\\share\\winapps\\detected" >>"${HOME}"/.local/share/winapps/installed.bat
         echo "RENAME \\\\tsclient\\home\\.local\\share\\winapps\\installed.tmp installed" >>${HOME}/.local/share/winapps/installed.bat
         # xfreerdp_opt="xfreerdp ${RDP_FLAGS} /d:${RDP_DOMAIN} /u:${RDP_USER} /p:${RDP_PASS} /v:${RDP_IP} +auto-reconnect +clipboard +home-drive -wallpaper /scale:${RDP_SCALE} /dynamic-resolution"
-        xfreerdp /d:"${RDP_DOMAIN}" /u:"${RDP_USER}" /p:"${RDP_PASS}" /v:"${RDP_IP}" -decorations /cert:ignore +auto-reconnect +home-drive -wallpaper /span /wm-class:"RDPInstaller" /app:"C:\Windows\System32\cmd.exe" /app-icon:"${path_script}/../docs/icons/windows.svg" /app-cmd:"/C \\\\tsclient\\home\\.local\\share\\winapps\\installed.bat" 1>/dev/null 2>&1 &
+        xfreerdp /d:"${RDP_DOMAIN}" /u:"${RDP_USER}" /p:"${RDP_PASS}" /v:"${RDP_IP}" -decorations /cert:ignore +auto-reconnect +home-drive -wallpaper /span /wm-class:"RDPInstaller" /app:"C:\Windows\System32\cmd.exe" /app-icon:"${script_path}/../docs/icons/windows.svg" /app-cmd:"/C \\\\tsclient\\home\\.local\\share\\winapps\\installed.bat" 1>/dev/null 2>&1 &
         COUNT=0
         while [ ! -f "${HOME}/.local/share/winapps/installed" ]; do
             sleep 5
@@ -105,7 +106,7 @@ ${BIN_PATH}/winapps ${1} $*
 _wa_config_apps() {
     APPS=()
     for F in $(sed 's/\r/\n/g' "${HOME}/.local/share/winapps/installed"); do
-        source "${path_script}/../apps/${F}/info"
+        source "${script_path}/../apps/${F}/info"
         APPS+=("${FULL_NAME} (${F})")
         INSTALLED_EXES+=("$(echo "${WIN_EXECUTABLE##*\\}" | tr '[:upper:]' '[:lower:]')")
     done
@@ -122,7 +123,7 @@ _wa_config_apps() {
             echo "${APP}" >>"${HOME}/.local/share/winapps/installed"
         done
     fi
-    ${SUDO} cp "${path_script}/winapps" "${BIN_PATH}/winapps"
+    ${SUDO} cp "${script_path}/winapps" "${BIN_PATH}/winapps"
     COUNT=0
     if [ "${APP_INSTALL}" != "Do not set up any pre-configured applications" ]; then
         for F in $(sed 's/\r/\n/g' "${HOME}/.local/share/winapps/installed"); do
@@ -217,7 +218,7 @@ _wa_config_windows() {
     if [ ${USEDEMO} != 1 ]; then
         ${SUDO} rm -f "${APP_PATH}/windows.desktop"
         ${SUDO} mkdir -p "${SYS_PATH}/icons"
-        ${SUDO} cp "${path_script}/../docs/icons/windows.svg" "${SYS_PATH}/icons/windows.svg"
+        ${SUDO} cp "${script_path}/../docs/icons/windows.svg" "${SYS_PATH}/icons/windows.svg"
         echo "[Desktop Entry]
 Name=Windows
 Exec=${BIN_PATH}/winapps windows %F

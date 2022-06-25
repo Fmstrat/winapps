@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-# path_script="$(cd "$(dirname "$0")" && pwd)"
-path_script="$(dirname "$(readlink -f "$0")")"
+# script_path="$(cd "$(dirname "$0")" && pwd)"
+script_path="$(dirname "$(readlink -f "$0")")"
 path_conf="${HOME}/.config/winapps"
 path_share="${HOME}/.local/share/winapps"
 # path_conf_home="${HOME}/.winapps"
@@ -18,17 +18,46 @@ debug_log() {
 if [ -f "$file_conf" ]; then
     source "${file_conf}"
 else
-    cp "$path_script/../docs/winapps-example.conf" "$file_conf"
+    cp "$script_path/../docs/winapps-example.conf" "$file_conf"
     echo "Change $file_conf configuration. Exiting..."
     exit
 fi
 
+# determine whether the user has sudo permission
+current_user=$(whoami)
+if [ "$current_user" = "root" ]; then
+    pre_sudo=''
+else
+    has_root_permission=$(sudo -l -U "$current_user" | grep "ALL")
+    if [ -n "$has_root_permission" ]; then
+        echo "User $current_user has sudo permission."
+        pre_sudo="sudo"
+    else
+        echo "User $current_user has no sudo permission."
+        echo "Won't install xfreerdp automatically."
+        # exit 1
+    fi
+fi
+
+## yum or apt
+if command -v apt; then
+    install_cmd="$pre_sudo apt"
+elif command -v yum; then
+    install_cmd="$pre_sudo yum"
+elif command -v dnf; then
+    install_cmd="$pre_sudo dnf"
+else
+    echo "not found apt/yum/dnf"
+    # exit 1
+fi
+
 if ! command -v xfreerdp >/dev/null; then
-    if sudo apt-get install -y freerdp2-x11; then
+    echo "Try install xfreerdp..."
+    if $install_cmd install -y freerdp2-x11; then
         echo "Installed xfreerdp"
     else
         echo "You need xfreerdp!"
-        echo "  sudo apt-get install -y freerdp2-x11"
+        echo "  $install_cmd install -y freerdp2-x11"
         exit
     fi
 fi
@@ -91,11 +120,11 @@ install)
     :
     ;;
 *)
-    debug_log "path_script: ${path_script}"
-    if [ -e "${path_script}/../apps/${arg_1}/info" ]; then
+    debug_log "script_path: ${script_path}"
+    if [ -e "${script_path}/../apps/${arg_1}/info" ]; then
         ## search from src
-        source "${path_script}/../apps/${arg_1}/info"
-        ICON="${path_script}/../apps/${arg_1}/icon.svg"
+        source "${script_path}/../apps/${arg_1}/info"
+        ICON="${script_path}/../apps/${arg_1}/icon.svg"
     elif [ -e "$path_share/apps/${arg_1}/info" ]; then
         ## search from user share
         source "$path_share/apps/${arg_1}/info"
