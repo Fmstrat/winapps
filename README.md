@@ -1,4 +1,7 @@
 # WinApps for Linux
+
+***Looking for maintainers, see: https://github.com/Fmstrat/winapps/issues/269***
+
 Run Windows apps such as Microsoft Office/Adobe in Linux (Ubuntu/Fedora) and GNOME/KDE as if they were a part of the native OS, including Nautilus integration for right clicking on files of specific mime types to open them.
 
 <img src="docs/image/demo.gif" width=1000>
@@ -71,7 +74,7 @@ Note: The officially configured application list below is fueled by the communit
   </tr>
   <tr>
     <td><img src="apps/powershell/icon.svg" width="100"></td><td>Powershell<br>(Standard, Core)</td>
-    <td><img src="apps/vs-enterprise-2019/icon.svg" width="100"></td><td>Visual Studio<br>(2019 - Ent|Pro|Com)</td>
+    <td><img src="apps/vs-enterprise-2019/icon.svg" width="100"></td><td>Visual Studio<br>(2019, 2022 - Ent|Pro|Com)</td>
   </tr>
   <tr>
     <td><img src="docs/icons/windows.svg" width="100"></td><td>Windows<br>(Full RDP session)</td>
