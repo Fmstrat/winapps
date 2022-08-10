@@ -97,7 +97,7 @@ If this VM is in KVM and you want to use auto-IP detection, you will need to nam
 To get things going, use:
 ``` bash
 sudo apt-get install -y freerdp2-x11
-git clone https://github.com/xiagw/winapps.git
+git clone https://github.com/ahmed-tasaly/winapps.git
 cd winapps
 ```
 ### Step 3: Creating your WinApps configuration file
