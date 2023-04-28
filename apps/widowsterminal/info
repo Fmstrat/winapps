@@ -1,0 +1,14 @@
+# GNOME shortcut name
+NAME="WindowsTerminal"
+
+# Used for descriptions and window class
+FULL_NAME="WindowsTerminal"
+
+# The executable inside windows
+WIN_EXECUTABLE="C:\Program Files\WindowsApps\Microsoft.WindowsTerminal_1.12.10733.0_x64__8wekyb3d8bbwe\WindowsTerminal.exe"
+
+# GNOME categories
+CATEGORIES="WinApps;Develop"
+
+# GNOME mimetypes
+MIME_TYPES=""

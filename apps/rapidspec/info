@@ -1,0 +1,14 @@
+# GNOME shortcut name
+NAME="RapidSpecification"
+
+# Used for descriptions and window class
+FULL_NAME="RapidSpecification"
+
+# The executable inside windows
+WIN_EXECUTABLE="C:\Program Files (x86)\ParallelGraphics\RapidSpecification\RapidSpecification.exe"
+
+# GNOME categories
+CATEGORIES="WinApps;RapidAuthor"
+
+# GNOME mimetypes
+MIME_TYPES=""
