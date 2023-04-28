@@ -5,7 +5,7 @@ NAME="Premiere Pro CC"
 FULL_NAME="Adobe Premiere Pro CC"
 
 # The executable inside windows
-WIN_EXECUTABLE="C:\Program Files\Adobe\Adobe Premiere Pro 2020\Adobe Premiere Pro.exe"
+WIN_EXECUTABLE="C:\Program Files\Adobe\Adobe Premiere Pro 2022\Adobe Premiere Pro.exe"
 
 # GNOME categories
 CATEGORIES="WinApps;Adobe"

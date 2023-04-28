@@ -5,7 +5,7 @@ NAME="Photoshop CC"
 FULL_NAME="Adobe Photoshop CC"
 
 # The executable inside windows
-WIN_EXECUTABLE="C:\Program Files\Adobe\Adobe Photoshop 2020\Photoshop.exe"
+WIN_EXECUTABLE="C:\Program Files\Adobe\Adobe Photoshop 2022\Photoshop.exe"
 
 # GNOME categories
 CATEGORIES="WinApps;Adobe"

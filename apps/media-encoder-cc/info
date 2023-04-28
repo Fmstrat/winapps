@@ -1,0 +1,14 @@
+# GNOME shortcut name
+NAME="Media Encoder CC"
+
+# Used for descriptions and window class
+FULL_NAME="Adobe Media Encoder CC"
+
+# The executable inside windows
+WIN_EXECUTABLE="C:\Program Files\Adobe\Adobe Media Encoder 2022\Adobe Media Encoder.exe"
+
+# GNOME categories
+CATEGORIES="WinApps;Adobe"
+
+# GNOME mimetypes
+MIME_TYPES="application/media-encoder;"
