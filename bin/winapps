@@ -98,18 +98,33 @@ main() {
     arg_1="$1"
     arg_2="$2"
 
-    xfreerdp_opt="xfreerdp ${RDP_FLAGS} /d:${RDP_DOMAIN} /u:${RDP_USER} /p:${RDP_PASS} /v:${RDP_IP} -decorations /cert:ignore +auto-reconnect +clipboard +home-drive -wallpaper /scale:${RDP_SCALE:-100} /dynamic-resolution"
+    xfreerdp_opt=(
+        xfreerdp
+        ${RDP_FLAGS}
+        /d:${RDP_DOMAIN}
+        "/u:${RDP_USER}"
+        /p:${RDP_PASS}
+        /v:${RDP_IP}
+        -decorations
+        /cert:ignore
+        +auto-reconnect
+        +clipboard
+        +home-drive
+        -wallpaper
+        /scale:${RDP_SCALE:-100}
+        /dynamic-resolution
+    )
     case "${arg_1}" in
     windows)
-        $xfreerdp_opt /wm-class:"Microsoft Windows" >/dev/null 2>&1 &
+        "${xfreerdp_opt[@]}" /wm-class:"Microsoft Windows" >/dev/null 2>&1 &
         ;;
     check)
         debug_log "CHECK"
-        $xfreerdp_opt ${MULTI_FLAG} /app:"explorer.exe"
+        "${xfreerdp_opt[@]}" ${MULTI_FLAG} /app:"explorer.exe"
         ;;
     manual)
         debug_log "MANUAL:${arg_2}"
-        $xfreerdp_opt ${MULTI_FLAG} /app:"${arg_2}" >/dev/null 2>&1 &
+        "${xfreerdp_opt[@]}" ${MULTI_FLAG} /app:"${arg_2}" >/dev/null 2>&1 &
         ;;
     install)
         :
@@ -136,9 +151,9 @@ main() {
             debug_log "HOME:${HOME}"
             FILE=$(echo "${arg_2}" | sed 's|'"${HOME}"'|\\\\tsclient\\home|;s|/|\\|g;s|\\|\\\\|g')
             debug_log "FILE:${FILE}"
-            $xfreerdp_opt ${MULTI_FLAG} /wm-class:"${FULL_NAME}" /app:"${WIN_EXECUTABLE}" /app-icon:"${ICON}" /app-cmd:"\"${FILE}\"" &>/dev/null &
+            "${xfreerdp_opt[@]}" ${MULTI_FLAG} /wm-class:"${FULL_NAME}" /app:"${WIN_EXECUTABLE}" /app-icon:"${ICON}" /app-cmd:"\"${FILE}\"" &>/dev/null &
         else
-            $xfreerdp_opt ${MULTI_FLAG} /wm-class:"${FULL_NAME}" /app:"${WIN_EXECUTABLE}" /app-icon:"${ICON}" &>/dev/null &
+            "${xfreerdp_opt[@]}" ${MULTI_FLAG} /wm-class:"${FULL_NAME}" /app:"${WIN_EXECUTABLE}" /app-icon:"${ICON}" &>/dev/null &
         fi
         ;;
     esac
