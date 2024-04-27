@@ -1,6 +1,6 @@
 # WinApps for Linux
 
-***Looking for maintainers, see: https://github.com/Fmstrat/winapps/issues/269***
+Latest documentation available at: https://nowsci.com/#/winapps/?id=winapps-for-linux
 
 Run Windows apps such as Microsoft Office/Adobe in Linux (Ubuntu/Fedora) and GNOME/KDE as if they were a part of the native OS, including Nautilus integration for right clicking on files of specific mime types to open them.
 

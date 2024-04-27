@@ -1,4 +1,7 @@
 # Creating a Virtual Machine in KVM
+
+Latest documentation available at: https://nowsci.com/#/winapps/kvm/?id=creating-a-virtual-machine-in-kvm
+
 This step-by-step guide will take you through setting up a CPU and memory efficient virtual machine to use with WinApps leveraging KVM, an open-source virtualization software contained in most linux distributions.
 
 ## Install KVM
