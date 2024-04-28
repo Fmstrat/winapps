@@ -76,7 +76,7 @@ if [ "${1}" = "windows" ]; then
 	xfreerdp ${RDP_FLAGS} /d:"${RDP_DOMAIN}" /u:"${RDP_USER}" /p:"${RDP_PASS}" /v:${RDP_IP} /scale:${RDP_SCALE} /dynamic-resolution +clipboard +auto-reconnect +home-drive /wm-class:"Microsoft Windows" 1> /dev/null 2>&1 &
 elif [ "${1}" = "check" ]; then
 	dprint "CHECK"
-	xfreerdp ${RDP_FLAGS} /d:"${RDP_DOMAIN}" /u:"${RDP_USER}" /p:"${RDP_PASS}" /v:${RDP_IP} +auto-reconnect +clipboard +home-drive -wallpaper /scale:${RDP_SCALE} /dynamic-resolution /${MULTI_FLAG} /app:"explorer.exe"
+	xfreerdp ${RDP_FLAGS} /d:"${RDP_DOMAIN}" /u:"${RDP_USER}" /p:"${RDP_PASS}" /v:${RDP_IP} +auto-reconnect +clipboard +home-drive -wallpaper /scale:${RDP_SCALE} /dynamic-resolution /${MULTI_FLAG} /app:"explorer.exe" /sec:tls
 elif [ "${1}" = "manual" ]; then
 	dprint "MANUAL:${2}"
 	xfreerdp ${RDP_FLAGS} /d:"${RDP_DOMAIN}" /u:"${RDP_USER}" /p:"${RDP_PASS}" /v:${RDP_IP} +auto-reconnect +home-drive +clipboard -wallpaper /scale:${RDP_SCALE} /dynamic-resolution /${MULTI_FLAG} /app:"${2}" 1> /dev/null 2>&1 &
