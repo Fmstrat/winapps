@@ -1,0 +1,15 @@
+# GNOME shortcut name
+NAME="Visual Studio 2022 Enterprise"
+
+# Used for descriptions and window class
+FULL_NAME="Visual Studio 2022 Enterprise"
+
+# The executable inside windows
+WIN_EXECUTABLE="C:\Program Files\Microsoft Visual Studio\2022\Enterprise\Common7\IDE\devenv.exe"
+
+# GNOME categories
+CATEGORIES="Development"
+
+# GNOME mimetypes
+# See: https://stackoverflow.com/questions/208056/what-are-the-mime-types-for-net-project-source-code-files
+MIME_TYPES="text/xml;text/plain;text/x-csharp"
