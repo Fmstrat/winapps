@@ -20,6 +20,17 @@ else
 	. "${HOME}/.winapps"
 fi
 
+if [ ! -z "${RDP_SECRET}" ]; then
+	RDP_PASS=$(secret-tool lookup winapps ${RDP_SECRET})
+
+	if [ -z "${RDP_PASS}" ]; then
+		echo "Could not find password in secret-tool"
+		echo "Please run:"
+		echo "secret-tool store --label='winapps' winapps ${RDP_SECRET}"
+		exit
+	fi
+fi
+
 function dprint() {
 	if [ "${DEBUG}" = "true" ]; then
 		echo "[${RUN}] ${1}" >> "${HOME}/.local/share/winapps/winapps.log"
