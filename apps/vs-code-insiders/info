@@ -1,0 +1,15 @@
+# GNOME shortcut name
+NAME="Code - Insiders"
+
+# Used for descriptions and window class
+FULL_NAME="Visual Studio Code Insiders"
+
+# The executable inside windows
+WIN_EXECUTABLE="%USERPROFILE%\AppData\Local\Programs\Microsoft VS Code Insiders\Code - Insiders.exe"
+
+# GNOME categories
+CATEGORIES="WinApps;Code"
+
+# GNOME mimetypes
+# See: https://stackoverflow.com/questions/208056/what-are-the-mime-types-for-net-project-source-code-files
+MIME_TYPES="text/xml;text/plain;text/x-csharp"
