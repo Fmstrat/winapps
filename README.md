@@ -106,6 +106,7 @@ RDP_PASS="MyWindowsPassword"
 #RDP_DOMAIN="MYDOMAIN"
 #RDP_IP="192.168.123.111"
 #RDP_SCALE=100
+#RDP_DEVICE_SCALE=100 # can only be 100|140|180
 #RDP_FLAGS=""
 #MULTIMON="true"
 #DEBUG="true"
@@ -116,7 +117,7 @@ Options:
 - When using a pre-existing non-KVM RDP server, you can use the `RDP_IP` to specify it's location
 - If you are running a VM in KVM with NAT enabled, leave `RDP_IP` commented out and WinApps will auto-detect the right local IP
 - For domain users, you can uncomment and change `RDP_DOMAIN`
-- On high-resolution (UHD) displays, you can set `RDP_SCALE` to the scale you would like [100|140|160|180]
+- On high-resolution (UHD) displays, you can set `RDP_SCALE` to the scale you would like.  `RDP_DEVICE_SCALE` is automatically set depending on your `RDP_SCALE`, but you can manually specify one of [100|140|180] if you wish.
 - To add flags to the FreeRDP call, such as `/audio-mode:1` to pass in a mic, use the `RDP_FLAGS` configuration option
 - For multi-monitor setups, you can try enabling `MULTIMON`, however if you get a black screen (FreeRDP bug) you will need to revert back
 - If you enable `DEBUG`, a log will be created on each application start in `~/.local/share/winapps/winapps.log`
