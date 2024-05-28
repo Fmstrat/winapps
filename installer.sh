@@ -24,6 +24,7 @@ Please run "./installer.sh --system --uninstall" first.'
 
 function waInstall() {
 	${SUDO} mkdir -p "${SYS_PATH}/apps"
+	${SUDO} mkdir -p "${BIN_PATH}"
 	. "${DIR}/bin/winapps" install
 }
 
