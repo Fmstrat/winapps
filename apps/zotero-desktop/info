@@ -1,0 +1,14 @@
+# GNOME shortcut name
+NAME="Zotero"
+
+# Used for descriptions and window class
+FULL_NAME="Zotero"
+
+# The executable inside windows
+WIN_EXECUTABLE="C:\Program Files (x86)\Zotero\Zotero.EXE"
+
+# GNOME categories
+CATEGORIES="WinApps;Zotero"
+
+# GNOME mimetypes
+MIME_TYPES=""
