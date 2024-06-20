@@ -28,6 +28,8 @@ Otherwise, to set up the standard way, open `virt-manager` (Virtual Machines).
 
 Next, go to `Edit`->`Preferences`, and check `Enable XML editing`, then click the `Close` button.
 
+If you're using a version of virt-manager that is not >2.2.0 you won't have the XML editing option. Instead you need to use `virsh edit <vmname> `.
+
 ![](kvm/01.png)
 
 Now it is time to add a new VM by clicking the `+` button.
@@ -201,6 +203,5 @@ sudo systemctl restart libvirtd
 sudo ln -s /etc/apparmor.d/usr.sbin.libvirtd /etc/apparmor.d/disable/
 ```
 You will likely need to reboot to ensure your current shell is added to the group.
-
 
 
