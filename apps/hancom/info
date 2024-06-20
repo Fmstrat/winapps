@@ -1,0 +1,14 @@
+# GNOME shortcut name
+NAME="HWP 2020"
+
+# Used for descriptions and window class
+FULL_NAME="Hancom 2020"
+
+# The executable inside windows
+WIN_EXECUTABLE="C:\Program Files (x86)\Hnc\Office 2020\HOffice110\Bin\Hwp.exe"
+
+# GNOME categories
+CATEGORIES="WinApps"
+
+# GNOME mimetypes
+MIME_TYPES="application/hwp2020;"
