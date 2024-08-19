@@ -1,0 +1,14 @@
+# GNOME shortcut name
+NAME="Authy"
+
+# Used for descriptions and window class
+FULL_NAME="Authy"
+
+# The executable inside windows
+WIN_EXECUTABLE="C:\Users\Bruno\AppData\Local\authy\Authy Desktop.exe"
+
+# GNOME categories
+CATEGORIES="WinApps;Accessories"
+
+# GNOME mimetypes
+MIME_TYPES=""
