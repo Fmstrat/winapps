@@ -95,6 +95,9 @@ elif [ "${1}" != "install" ]; then
 		echo "You need to run 'install.sh' first."
 		exit 1
 	fi
+
+	# Add support for applications installed in User's home directory
+	WIN_EXECUTABLE="${WIN_EXECUTABLE/\%USERPROFILE\%/C:\\Users\\${RDP_USER}}"
 	if [ -n "${2}" ]; then
 		dprint "HOME:${HOME}"
 		FILE=$(echo "${2}" | sed 's|'"${HOME}"'|\\\\tsclient\\home|;s|/|\\|g;s|\\|\\\\|g')
