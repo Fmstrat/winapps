@@ -283,6 +283,12 @@ if [ "${INSTALL_TYPE}" = 'User' ]; then
 	BIN_PATH="${HOME}/.local/bin"
 	APP_PATH="${HOME}/.local/share/applications"
 	SYS_PATH="${HOME}/.local/share/winapps"
+	if [ ! -d "${BIN_PATH}" ]; then
+		mkdir "${BIN_PATH}"
+	fi
+	if [ ! -d "${APP_PATH}" ]; then
+		mkdir "${APP_PATH}"
+	fi
 	if [ -n "${2}" ]; then
 		if [ "${2}" = '--uninstall' ]; then
 			# Uninstall
@@ -299,6 +305,12 @@ elif [ "${INSTALL_TYPE}" = 'System' ]; then
 	BIN_PATH="/usr/local/bin"
 	APP_PATH="/usr/share/applications"
 	SYS_PATH="/usr/local/share/winapps"
+	if [ ! -d "${BIN_PATH}" ]; then
+		mkdir "${BIN_PATH}"
+	fi
+	if [ ! -d "${APP_PATH}" ]; then
+		mkdir "${APP_PATH}"
+	fi
 	if [ -n "${2}" ]; then
 		if [ "${2}" = '--uninstall' ]; then
 			# Uninstall
